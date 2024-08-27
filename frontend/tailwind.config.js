@@ -6,26 +6,12 @@ module.exports = {
     colors: {
       white: "#ffffff",
       primary: {
-        200: "",
-        300: "",
-        400: "",
         DEFAULT: "#030229",
-        600: "",
+        400: "#B3B3BF",
       },
       secondary: {
-        200: "",
-        300: "",
-        400: "",
-        DEFAULT: "",
-        600: "",
+        DEFAULT: "#605BFF",
       },
-      grey: {
-        200: "",
-        300: "",
-        400: "",
-        DEFAULT: "",
-        600: "",
-      }
     },
 
     fontSize: {

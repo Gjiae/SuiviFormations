@@ -33,20 +33,14 @@ export const Typography = ({
     }
 
     switch (theme) {
-        case "black":
-            colorStyles = "";
-            break;
-        case "grey":
-            colorStyles = "";
-            break;
         case "white":
-            colorStyles = "";
+            colorStyles = "text-white";
             break;
         case "primary":
-            colorStyles = "";
+            colorStyles = "text-primary";
             break;
         case "secondary":
-            colorStyles = "";
+            colorStyles = "text-secondary";
             break;
         }
 

@@ -18,18 +18,37 @@ export const Typography = ({
     children
 }:Props) => {
     
-    let variantStyles: string = ""
+    let variantStyles: string = "", colorStyles: string;
 
     switch (variant) {
         case "h1":
-            variantStyles = "text-red-500"
+            variantStyles = "text-8xl"
             break;
         case "h2":
-        variantStyles = "text-green-500"
+            variantStyles = "text-7xl"
+            break;
+        case "h3":
+            variantStyles = "text-6xl"
             break;
     }
 
-
+    switch (theme) {
+        case "black":
+            colorStyles = "";
+            break;
+        case "grey":
+            colorStyles = "";
+            break;
+        case "white":
+            colorStyles = "";
+            break;
+        case "primary":
+            colorStyles = "";
+            break;
+        case "secondary":
+            colorStyles = "";
+            break;
+        }
 
 
     return (
@@ -38,7 +57,6 @@ export const Typography = ({
                 variantStyles,
                 weight === "medium" && "font-medium",
                 className,
-                "text-8xl"
             )}>
             {children}
         </Component>

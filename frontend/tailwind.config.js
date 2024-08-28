@@ -95,6 +95,7 @@ module.exports = {
 
     fontRadius: {
       DEFAULT: "10px",
+      full: "9999px",
     },
     
     extend: {},

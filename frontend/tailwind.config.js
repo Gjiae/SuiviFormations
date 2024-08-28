@@ -92,6 +92,11 @@ module.exports = {
         },
       ],
     },
+
+    fontRadius: {
+      DEFAULT: "10px",
+    },
+    
     extend: {},
   },
   plugins: [],

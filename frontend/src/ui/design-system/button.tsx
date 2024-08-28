@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 interface Props {
     size?: "small" | "medium" | "large";
-    variant?: "basique" | "secondaire" | "cancel" | "disabled" | "ico";
+    variant?: "basique" | "secondary" | "green" | "black" | "cancel" | "disabled" | "ico";
     icon?: IconProps;
     iconTheme?: "basique" | "secondary" | "gray";
     iconPosition?: "left" | "right";
@@ -29,8 +29,14 @@ export const Button = ({
         case "basique": //Default
             variantStyles = "bg-primary hover:bg-primary/70 text-gray rounded";
             break;
-        case "secondaire":
+        case "secondary":
             variantStyles = "bg-white hover:bg-stroke border border-primary text-primary rounded"
+            break;
+        case "green":
+            variantStyles = "bg-green hover:bg-green/80 text-white rounded"
+            break;
+        case "black":
+            variantStyles = "bg-dark hover:bg-dark/60 text-white rounded"
             break;
         case "cancel":
             variantStyles = "bg-white hover:bg-gray border border-stroke text-dark rounded"

@@ -7,10 +7,12 @@ export default function Home() {
     <>
       <Seo title="Suivi des formations" description="Description..." />
 
-      <Button>Accent</Button>
-      <Button variant="basique">Accent</Button>
-      <Button variant="secondaire">Accent</Button>
-      <Button variant="disabled">Accent</Button>
+      <Button>Bouton basique</Button>
+      <Button variant="secondaire" size="medium">Bouton Secondaire</Button>
+      <Button variant="disabled" size="medium">Disabled</Button>
+      <Button variant="cancel" size="small">Cancel</Button>
+
+      <Button variant="basique" size="small">Save</Button>
 
       <Typography variant="h1" component="div">
         Dashboard

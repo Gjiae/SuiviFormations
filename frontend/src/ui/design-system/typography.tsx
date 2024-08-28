@@ -22,13 +22,13 @@ export const Typography = ({
 
     switch (variant) {
         case "h1":
-            variantStyles = "text-8xl"
+            variantStyles = "text-H4"
             break;
         case "h2":
-            variantStyles = "text-7xl"
+            variantStyles = "text-H5"
             break;
         case "h3":
-            variantStyles = "text-6xl"
+            variantStyles = "text-H6"
             break;
     }
 

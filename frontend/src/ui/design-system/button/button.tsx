@@ -2,9 +2,9 @@ import clsx from "clsx";
 
 interface Props {
     size?: "small" | "medium" | "large";
-    variant?: "basique" | "secondaire" | "disabled" | "ico";
+    variant?: "basique" | "secondaire" | "cancel" | "disabled" | "ico";
     icon?: any;
-    iconTheme?: "accent" | "secondary" | "gray";
+    iconTheme?: "basique" | "secondary" | "gray";
     iconPosition?: "left" | "center" | "right";
     disabled?: boolean;
     isLoading?: boolean;
@@ -15,7 +15,7 @@ export const Button = ({
     size = "medium",
     variant = "basique",
     icon,
-    iconTheme = "accent",
+    iconTheme = "basique",
     iconPosition = "center",
     disabled,
     isLoading,
@@ -26,13 +26,16 @@ export const Button = ({
 
     switch (variant) {
         case "basique": //Default
-            variantStyles = "bg-secondary hover:bg-secondary/70 text-white rounded";
+            variantStyles = "bg-primary hover:bg-primary/70 text-gray rounded";
             break;
         case "secondaire":
-            variantStyles = "bg-secondary/30 hover:bg-secondary/60 text-primary rounded"
+            variantStyles = "bg-white hover:bg-stroke border border-primary text-primary rounded"
+            break;
+        case "cancel":
+            variantStyles = "bg-white hover:bg-gray border border-stroke text-dark rounded"
             break;
         case "disabled":
-            variantStyles = "bg-gray-400 border border-gray-500 text-gray-600 rounded cursor-not-allowed"
+            variantStyles = "bg-gray border border-stroke text-darkgray rounded cursor-not-allowed"
             break;
         case "ico":
             variantStyles = ""
@@ -41,10 +44,10 @@ export const Button = ({
 
     switch (size) {
         case "small": //Default
-            sizeStyles = ""
+            sizeStyles = "px-[25px] py-[8px]"
             break;
         case "medium":
-            sizeStyles = ""
+            sizeStyles = "px-[30px] py-[11px]"
             break;
         case "large":
             sizeStyles = ""
@@ -53,7 +56,7 @@ export const Button = ({
 
     return (
         <>
-            <button type="button" className={clsx(variantStyles, icoSize)} onClick={() => console.log('click')} disabled={disabled}>
+            <button type="button" className={clsx(variantStyles, sizeStyles, icoSize)} onClick={() => console.log('click')} disabled={disabled}>
                 {children}
             </button>
         </>

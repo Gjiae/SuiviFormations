@@ -4,12 +4,15 @@ import { Spinner } from '@/ui/design-system/spinner'
 import { Typography } from '@/ui/design-system/typography'
 import { Container } from '@/ui/components/container'
 import { FaBell } from 'react-icons/fa6'
+import { Sidebar } from '@/ui/components/navigation'
+
 
 export default function Home() {
   return (
     <>
-      <Seo title="Suivi des formations" description="Description..." />
 
+      <Seo title="Suivi des formations" description="Description..." />
+      <Sidebar/>
       <Container>
         <Typography variant="h1" component="div">
           Affichage spinner

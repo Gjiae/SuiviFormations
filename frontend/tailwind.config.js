@@ -19,26 +19,74 @@ module.exports = {
     },
 
     fontSize: {
-      "8xl": [
-        "26px",
+      "H4": [
+        "28px",
         {
-          lineHeight: "33px",
-          letterSpacing: "0%",
+          lineHeight: "34px",
+          letterSpacing: "0px",
           fontWeight: "Bold",
         },
       ],
-      "7xl": [
+      "H5": [
+        "24px",
+        {
+          lineHeight: "38px",
+          letterSpacing: "0px",
+          fontWeight: "Bold",
+        },
+      ],
+      "H6": [
+        "22px",
+        {
+          lineHeight: "28px",
+          letterSpacing: "0px",
+          fontWeight: "Bold",
+        },
+      ],
+      "16Reg": [
         "16px",
         {
           lineHeight: "24px",
           letterSpacing: "0px",
-          fontWeight: "Semi Bold",
+          fontWeight: "Regular",
         },
       ],
-      "6xl": [
+      "16Med": [
+        "16px",
+        {
+          lineHeight: "24px",
+          letterSpacing: "0px",
+          fontWeight: "Medium",
+        },
+      ],
+      "14Reg": [
+        "14px",
+        {
+          lineHeight: "20px",
+          letterSpacing: "0px",
+          fontWeight: "Regular",
+        },
+      ],
+      "14Med": [
         "14px",
         {
           lineHeight: "22px",
+          letterSpacing: "0px",
+          fontWeight: "Medium",
+        },
+      ],
+      "12Reg": [
+        "12px",
+        {
+          lineHeight: "18px",
+          letterSpacing: "0px",
+          fontWeight: "Regular",
+        },
+      ],
+      "12Med": [
+        "12px",
+        {
+          lineHeight: "15px",
           letterSpacing: "0px",
           fontWeight: "Medium",
         },

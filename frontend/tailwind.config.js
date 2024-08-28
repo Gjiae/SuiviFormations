@@ -5,13 +5,17 @@ module.exports = {
 
     colors: {
       white: "#ffffff",
-      primary: {
-        DEFAULT: "#030229",
-        400: "#B3B3BF",
-      },
-      secondary: {
-        DEFAULT: "#605BFF",
-      },
+      dark: "#1C2434",
+      darkgray: "#8A99AF",
+      stroke: "#E2E8F0",
+      medgray: "#DEE4EE",
+      gray: "#EFF4FB",
+      primary: "#3C50E0",
+      secondary: "#80CAEE",
+      textcolor: "#64748B",
+      green: "#10B981",
+      yellow: "#F0950C",
+      red: "#FB5454",
     },
 
     fontSize: {

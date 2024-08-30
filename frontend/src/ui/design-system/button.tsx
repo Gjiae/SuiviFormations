@@ -104,14 +104,16 @@ export const Button = ({
           sizeStyles,
           icoSize,
           isLoading,
-          'relative'
+          'relative animate'
         )}
         onClick={() => console.log('click')}
         disabled={disabled}
       >
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center">
-            {variant === 'basique' || variant === 'green' || variant === 'black' ? (
+            {variant === 'basique' ||
+            variant === 'green' ||
+            variant === 'black' ? (
               <Spinner size="small" variant="white" />
             ) : (
               <Spinner size="small" />

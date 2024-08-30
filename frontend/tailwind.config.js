@@ -48,7 +48,7 @@ module.exports = {
         {
           lineHeight: "24px",
           letterSpacing: "0px",
-          fontWeight: "Regular",
+          fontWeight: "500",
         },
       ],
       "16Med": [
@@ -56,7 +56,7 @@ module.exports = {
         {
           lineHeight: "24px",
           letterSpacing: "0px",
-          fontWeight: "Medium",
+          fontWeight: "600",
         },
       ],
       "14Reg": [
@@ -64,7 +64,7 @@ module.exports = {
         {
           lineHeight: "20px",
           letterSpacing: "0px",
-          fontWeight: "Regular",
+          fontWeight: "500",
         },
       ],
       "14Med": [
@@ -72,7 +72,7 @@ module.exports = {
         {
           lineHeight: "22px",
           letterSpacing: "0px",
-          fontWeight: "Medium",
+          fontWeight: "600",
         },
       ],
       "12Reg": [
@@ -80,7 +80,7 @@ module.exports = {
         {
           lineHeight: "18px",
           letterSpacing: "0px",
-          fontWeight: "Regular",
+          fontWeight: "500",
         },
       ],
       "12Med": [
@@ -88,7 +88,7 @@ module.exports = {
         {
           lineHeight: "15px",
           letterSpacing: "0px",
-          fontWeight: "Medium",
+          fontWeight: "600",
         },
       ],
     },

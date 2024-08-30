@@ -23,7 +23,7 @@ export const Logo = ({ size = 'medium' }: Props) => {
     <div>
       <svg
         width={sizeLogo}
-        height="159"
+        height={sizeLogo}
         viewBox="0 0 140 159"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

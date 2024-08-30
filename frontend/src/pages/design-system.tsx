@@ -7,6 +7,7 @@ import { Spinner } from '@/ui/design-system/spinner'
 import { Typography } from '@/ui/design-system/typography'
 import { Container } from '@/ui/components/container'
 import { FaBell } from 'react-icons/fa6'
+import { Footer } from '@/ui/components/navigation/footer'
 
 export default function DesignSystem() {
   return (
@@ -329,6 +330,8 @@ export default function DesignSystem() {
           </div>
         </div>
       </Container>
+
+      <Footer />
     </>
   )
 }

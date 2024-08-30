@@ -4,8 +4,8 @@ import { Spinner } from '@/ui/design-system/spinner'
 import { Typography } from '@/ui/design-system/typography'
 import { Container } from '@/ui/components/container'
 import { FaBell } from 'react-icons/fa6'
-import { Sidebar } from '@/ui/components/navigation'
 import { Logo } from '@/ui/design-system/logo'
+import { Avatar } from '@/ui/design-system/avatar'
 
 export default function Home() {
   return (
@@ -296,6 +296,29 @@ export default function Home() {
               <Logo size="small" />
               <Logo />
               <Logo size="large" />
+            </div>
+          </div>
+        </div>
+
+        {/*Avatar*/}
+        <div className="space-y-2">
+          <Typography variant="h1">Avatar</Typography>
+          <div className="flex felx-col gap-2 p-5 border border-darkgray divide-y-2 divide-darkgray rounded">
+            <div className="flex items-center gap-4 p-10">
+              <Avatar
+                size="small"
+                src="/assets/images/md.png"
+                alt="Avatar de Valentin Gazzoli"
+              />
+              <Avatar
+                src="/assets/images/md.png"
+                alt="Avatar de Valentin Gazzoli"
+              />
+              <Avatar
+                size="large"
+                src="/assets/images/oiseau.png"
+                alt="Avatar de Valentin Gazzoli"
+              />
             </div>
           </div>
         </div>

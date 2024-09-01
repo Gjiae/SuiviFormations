@@ -92,8 +92,9 @@ module.exports = {
       ],
     },
 
-    fontRadius: {
+    borderRadius: {
       DEFAULT: '10px',
+      semi: '30px',
       full: '9999px',
     },
 

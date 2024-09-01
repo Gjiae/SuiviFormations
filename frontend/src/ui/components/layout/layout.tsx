@@ -1,5 +1,6 @@
 import { Footer } from '../navigation/footer'
 import { Navigation } from '../navigation/navigation'
+import Sidebar from '../navigation/sidebar'
 
 interface Props {
   children: React.ReactNode

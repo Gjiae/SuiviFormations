@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 const Sidebar = () => {
   return (
-    <div className="fixed top-1 left-1 h-screen w-full max-w-[19rem] m-0 flex flex-col bg-medgray shadow-lg text-dark rounded p-4">
+    <aside className="fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 flex flex-col bg-white shadow-lg text-dark border border-bordergray rounded p-4">
       <Link href="/">
         <div className="flex items-center gap-2.5">
           <Logo size="medium" />
@@ -33,7 +33,7 @@ const Sidebar = () => {
         <div className="relative block w-full">
           <Link
             href="/"
-            className="flex items-center w-full p-3 hover:text-primary"
+            className="flex items-center w-full p-3 rounded hover:bg-gray"
           >
             <div className="grid mr-4">
               <FaHome />
@@ -42,7 +42,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href="/"
-            className="flex items-center w-full p-3 hover:text-primary"
+            className="flex items-center w-full p-3 rounded hover:bg-gray"
           >
             <div className="grid mr-4">
               <FaUsers />
@@ -51,7 +51,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href="/"
-            className="flex items-center w-full p-3 hover:text-primary"
+            className="flex items-center w-full p-3 rounded hover:bg-gray"
           >
             <div className="grid mr-4">
               <FaBarsStaggered />
@@ -141,11 +141,8 @@ const Sidebar = () => {
 
         {/*Section Paramètres*/}
         <div className="relative block w-full">
-          <div className="flex items-center w-full py-1">
-            <Link
-              href="#"
-              className="flex items-center w-full p-3 hover:text-primary"
-            >
+          <div className="flex items-center w-full rounded hover:bg-gray">
+            <Link href="#" className="flex items-center w-full p-3">
               <div className="grid mr-4">
                 <FaBell />
               </div>
@@ -159,12 +156,12 @@ const Sidebar = () => {
           </div>
           <Link
             href="#"
-            className="flex items-center w-full p-3 hover:text-primary"
+            className="flex items-center w-full p-3 rounded hover:bg-gray"
           >
             <div className="grid mr-4">
               <FaCog />
             </div>
-            <p className="block mr-auto leading-3">Paramètres</p>
+            <p className="block mr-auto leading-tight">Paramètres</p>
           </Link>
         </div>
       </nav>
@@ -184,7 +181,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   )
 }
 

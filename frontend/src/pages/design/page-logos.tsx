@@ -12,22 +12,24 @@ export default function DesignSystem() {
         description="Description..."
       />
 
-      <Layout>
-        <Container>
-          {/*Logos*/}
-          <div className="space-y-2">
-            <Typography variant="h1">Logos</Typography>
-            <div className="flex felx-col gap-2 p-5 border border-darkgray divide-y-2 divide-darkgray rounded">
-              <div className="flex items-center gap-4 p-10">
-                <Logo size="very-small" />
-                <Logo size="small" />
-                <Logo />
-                <Logo size="large" />
+      <div className="min-h-screen bg-bggray/50">
+        <Layout>
+          <Container>
+            {/*Logos*/}
+            <div className="space-y-2">
+              <Typography variant="h1">Logos</Typography>
+              <div className="flex felx-col gap-2 p-5 border border-darkgray divide-y-2 divide-darkgray rounded">
+                <div className="flex items-center gap-4 p-10">
+                  <Logo size="very-small" />
+                  <Logo size="small" />
+                  <Logo />
+                  <Logo size="large" />
+                </div>
               </div>
             </div>
-          </div>
-        </Container>
-      </Layout>
+          </Container>
+        </Layout>
+      </div>
     </>
   )
 }

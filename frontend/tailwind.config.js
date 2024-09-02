@@ -10,11 +10,13 @@ module.exports = {
       medgray: '#DEE4EE',
       gray: '#EFF4FB',
       primary: '#3C50E0',
+      bordergray: '#cfd8dc',
       secondary: '#80CAEE',
       textcolor: '#64748B',
       green: '#10B981',
       yellow: '#F0950C',
       red: '#FB5454',
+      bggray: '#ECEFF1',
     },
 
     fontSize: {

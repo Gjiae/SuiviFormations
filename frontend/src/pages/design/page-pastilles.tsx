@@ -13,35 +13,37 @@ export default function DesignSystem() {
         description="Description..."
       />
 
-      <Layout>
-        <Container>
-          {/*Pastilles*/}
-          <div className="space-y-2">
-            <Typography variant="h1">Pastilles</Typography>
-            <div className="flex flex-col gap-2 p-5 border border-darkgray divide-y-2 divide-darkgray rounded">
-              <div className="">
-                <div className="flex items-center gap-4 p-10">
-                  <Pastille
-                    iconTheme="basique"
-                    size="small"
-                    icon={{ icon: FaBell }}
-                  />
-                  <Pastille
-                    iconTheme="secondary"
-                    size="small"
-                    icon={{ icon: FaBell }}
-                  />
-                  <Pastille
-                    iconTheme="gray"
-                    size="small"
-                    icon={{ icon: FaBell }}
-                  />
+      <div className="min-h-screen bg-bggray/50">
+        <Layout>
+          <Container>
+            {/*Pastilles*/}
+            <div className="space-y-2">
+              <Typography variant="h1">Pastilles</Typography>
+              <div className="flex flex-col gap-2 p-5 border border-darkgray divide-y-2 divide-darkgray rounded">
+                <div className="">
+                  <div className="flex items-center gap-4 p-10">
+                    <Pastille
+                      iconTheme="basique"
+                      size="small"
+                      icon={{ icon: FaBell }}
+                    />
+                    <Pastille
+                      iconTheme="secondary"
+                      size="small"
+                      icon={{ icon: FaBell }}
+                    />
+                    <Pastille
+                      iconTheme="gray"
+                      size="small"
+                      icon={{ icon: FaBell }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Container>
-      </Layout>
+          </Container>
+        </Layout>
+      </div>
     </>
   )
 }

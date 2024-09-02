@@ -9,9 +9,11 @@ export default function Home() {
         title="Page d'accueil de l'application web de suivi des formations"
         description="Description..."
       />
-      <Layout>
-        <HomepageContainer />
-      </Layout>
+      <div className="min-h-screen bg-bggray/50">
+        <Layout>
+          <HomepageContainer />
+        </Layout>
+      </div>
     </>
   )
 }

@@ -10,6 +10,7 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Navigation />
+      <Sidebar />
       {children}
       <Footer />
     </>

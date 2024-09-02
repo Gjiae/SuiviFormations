@@ -9,28 +9,17 @@ interface Props {}
 
 export const Navigation = ({}: Props) => {
   return (
-    <div className="border-b-2 border-gray">
-      <Container className="flex items-center justify-between py-1.5 gap-7">
-        <Link href="/">
-          <div className="flex items-center gap-2.5">
-            <Logo size="small" />
-            <div className="flex flex-col">
-              <div className="text-black font-extrabold text-[24px]">
-                Suivi des formations
-              </div>
-              <Typography variant="12Reg" theme="gray" component="span">
-                Outil de suivi des formations pour BEC
-              </Typography>
-            </div>
+    <div className="border-b-2 bg-dark border-gray">
+      <Container className="flex items-center justify-between py-3 gap-7">
+        <div className="flex items-center gap-2.5">
+          <div className="flex flex-col">
+            <Typography variant="16Med" theme="gray" component="span">
+              Home / Suivi des formations
+            </Typography>
           </div>
-        </Link>
+        </div>
 
-        <div className="flex items-center gap-7">
-          <Typography variant="14Reg" className="flex items-center gap-7">
-            <ActiveLink href="/design-system">Design System</ActiveLink>
-            <ActiveLink href="/salaries">Salariés</ActiveLink>
-            <ActiveLink href="/formations">Formations</ActiveLink>
-          </Typography>
+        <div className="flex items-right gap-7">
           <div className="flex items-center gap-2">
             <Button size="small">Connexion</Button>
             <Button size="small" variant="secondary">

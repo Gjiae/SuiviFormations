@@ -2,10 +2,11 @@ import clsx from 'clsx'
 import Image from 'next/image'
 
 interface Props {
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large' | 'extra'
   forme?: 'rond' | 'carre'
   src: string
   alt: string
+  className?: string
 }
 
 export const Avatar = ({
@@ -13,6 +14,7 @@ export const Avatar = ({
   src,
   alt,
   forme = 'rond',
+  className = '',
 }: Props) => {
   let sizeStyles: string, formeStyle: string
 
@@ -26,6 +28,9 @@ export const Avatar = ({
     case 'large':
       sizeStyles = 'w-[50px] h-[50px]'
       break
+    case 'extra':
+      sizeStyles = 'w-[74px] h-[74px]'
+      break
   }
 
   switch (forme) {
@@ -38,12 +43,19 @@ export const Avatar = ({
   }
 
   return (
-    <div className={clsx(sizeStyles, formeStyle, 'bg-darkgray relative')}>
+    <div
+      className={clsx(
+        className,
+        sizeStyles,
+        formeStyle,
+        'bg-darkgray relative'
+      )}
+    >
       <Image
         fill
         src={src}
         alt={alt}
-        className={clsx(formeStyle, 'object-cover object-center')}
+        className={clsx(className, formeStyle, 'object-cover object-center')}
       />
     </div>
   )

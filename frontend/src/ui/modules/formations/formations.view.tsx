@@ -1,3 +1,9 @@
+import { FormationsList } from './components/formationsList.view'
+
 export const FormationsView = () => {
-  return <>Page des formations</>
+  return (
+    <>
+      <FormationsList />
+    </>
+  )
 }

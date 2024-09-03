@@ -10,6 +10,7 @@ import {
   FaBarsStaggered,
 } from 'react-icons/fa6'
 import Link from 'next/link'
+import { ActiveLink } from './active-link'
 
 const Sidebar = () => {
   return (
@@ -31,33 +32,24 @@ const Sidebar = () => {
       <nav className="flex min-w-[240px] flex-col gap-1 p-2">
         <hr className="my-2 border-x-dark" />
         <div className="relative block w-full">
-          <Link
-            href="/"
-            className="flex items-center w-full p-3 rounded hover:bg-gray"
-          >
+          <ActiveLink href="/">
             <div className="grid mr-4">
               <FaHome />
             </div>
             <p className="block mr-auto leading-tight">Tableau de bord</p>
-          </Link>
-          <Link
-            href="/"
-            className="flex items-center w-full p-3 rounded hover:bg-gray"
-          >
+          </ActiveLink>
+          <ActiveLink href="/employee">
             <div className="grid mr-4">
               <FaUsers />
             </div>
             <p className="block mr-auto leading-tight">Salariés</p>
-          </Link>
-          <Link
-            href="/"
-            className="flex items-center w-full p-3 rounded hover:bg-gray"
-          >
+          </ActiveLink>
+          <ActiveLink href="/formations">
             <div className="grid mr-4">
               <FaBarsStaggered />
             </div>
             <p className="block mr-auto leading-tight">Formations</p>
-          </Link>
+          </ActiveLink>
         </div>
         <div className="relative block w-full">
           <div
@@ -78,60 +70,42 @@ const Sidebar = () => {
           <div className="overflow-hidden">
             <div className="block w-full py-1 leading-tight">
               <nav className="flex min-w-[240px] flex-col gap-1 p-0">
-                <Link
-                  href="/design/page-avatar"
-                  className="flex items-center w-full p-3 leading-tight"
-                >
+                <ActiveLink href="/design/page-avatar">
                   <div className="mr-4">
                     <FaAngleRight />
                   </div>
                   Avatar
-                </Link>
-                <Link
-                  href="/design/page-boutons"
-                  className="flex items-center w-full p-3 leading-tight"
-                >
+                </ActiveLink>
+                <ActiveLink href="/design/page-boutons">
                   <div className="mr-4">
                     <FaAngleRight />
                   </div>
                   Bouton
-                </Link>
-                <Link
-                  href="/design/page-logos"
-                  className="flex items-center w-full p-3 leading-tight"
-                >
+                </ActiveLink>
+                <ActiveLink href="/design/page-logos">
                   <div className="mr-4">
                     <FaAngleRight />
                   </div>
                   Logos
-                </Link>
-                <Link
-                  href="/design/page-pastilles"
-                  className="flex items-center w-full p-3 leading-tight"
-                >
+                </ActiveLink>
+                <ActiveLink href="/design/page-pastilles">
                   <div className="mr-4">
                     <FaAngleRight />
                   </div>
                   Pastilles
-                </Link>
-                <Link
-                  href="/design/page-spinners"
-                  className="flex items-center w-full p-3 leading-tight"
-                >
+                </ActiveLink>
+                <ActiveLink href="/design/page-spinners">
                   <div className="mr-4">
                     <FaAngleRight />
                   </div>
                   Spinners
-                </Link>
-                <Link
-                  href="/design/page-typography"
-                  className="flex items-center w-full p-3 leading-tight"
-                >
+                </ActiveLink>
+                <ActiveLink href="/design/page-typography">
                   <div className="mr-4">
                     <FaAngleRight />
                   </div>
                   Typography
-                </Link>
+                </ActiveLink>
               </nav>
             </div>
           </div>
@@ -175,7 +149,7 @@ const Sidebar = () => {
             alt="Avatar de Valentin Gazzoli"
           />
           <div>
-            <a href="#" className="font-medium text-dark">
+            <a href="#" className="font-medium text-dark hover:text-primary">
               Mon compte
             </a>
           </div>

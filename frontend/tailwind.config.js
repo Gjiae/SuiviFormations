@@ -17,6 +17,8 @@ module.exports = {
       yellow: '#F0950C',
       red: '#FB5454',
       bggray: '#ECEFF1',
+      bluegray800: '#37474f',
+      bluegray900: '#263238',
     },
 
     fontSize: {

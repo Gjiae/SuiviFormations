@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import { Button } from '../../design-system/button'
-import { Logo } from '../../design-system/logo'
 import { Typography } from '../../design-system/typography'
 import { Container } from '../container'
-import { ActiveLink } from './active-link'
 import { FaBell } from 'react-icons/fa6'
 
 interface Props {}

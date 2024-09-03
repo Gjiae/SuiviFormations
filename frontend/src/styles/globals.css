@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-a:hover {
-  @apply text-primary;
-}
-
 .animate,
 a,
 a:hover {

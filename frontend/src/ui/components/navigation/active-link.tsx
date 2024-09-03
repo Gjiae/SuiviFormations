@@ -14,9 +14,26 @@ export const ActiveLink = ({ href, children }: Props) => {
     return router.pathname === href
   }, [router.pathname, href])
 
-  return (
-    <Link href={href} className={clsx(isActive && 'text-primary text-14Med')}>
-      {children}
-    </Link>
-  )
+  if (isActive) {
+    return (
+      <Link
+        href={href}
+        className={clsx(
+          isActive &&
+            'flex items-center w-full p-3 rounded hover:shadow-lg text-white bg-gradient-to-tr from-bluegray800 to-bluegray900'
+        )}
+      >
+        {children}
+      </Link>
+    )
+  } else {
+    return (
+      <Link
+        href={href}
+        className={clsx('flex items-center w-full p-3 rounded hover:bg-gray')}
+      >
+        {children}
+      </Link>
+    )
+  }
 }

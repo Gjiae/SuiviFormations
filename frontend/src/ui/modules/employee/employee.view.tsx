@@ -1,3 +1,9 @@
+import { EmployeeList } from './components/employeeList.view'
+
 export const EmployeeView = () => {
-  return <>Page des salariés</>
+  return (
+    <>
+      <EmployeeList />
+    </>
+  )
 }

@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 const Sidebar = () => {
   return (
-    <aside className="fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 flex flex-col bg-white shadow-lg text-dark border border-bordergray rounded p-4">
+    <aside className="flex inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 flex-col bg-white shadow-lg text-dark border border-bordergray rounded p-4">
       <Link href="/">
         <div className="flex items-center gap-2.5">
           <Logo size="medium" />

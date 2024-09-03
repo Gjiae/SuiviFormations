@@ -20,7 +20,7 @@ export const ActiveLink = ({ href, children }: Props) => {
         href={href}
         className={clsx(
           isActive &&
-            'flex items-center w-full p-3 rounded hover:shadow-lg text-white bg-gradient-to-tr from-bluegray800 to-bluegray900'
+            'flex items-center w-full p-3 rounded hover:shadow-darkgray hover:shadow-lg text-white bg-gradient-to-tr from-bluegray800 to-bluegray900'
         )}
       >
         {children}

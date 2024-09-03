@@ -3,12 +3,18 @@ import Image from 'next/image'
 
 interface Props {
   size?: 'small' | 'medium' | 'large'
+  forme?: 'rond' | 'carre'
   src: string
   alt: string
 }
 
-export const Avatar = ({ size = 'medium', src, alt }: Props) => {
-  let sizeStyles: string
+export const Avatar = ({
+  size = 'medium',
+  src,
+  alt,
+  forme = 'rond',
+}: Props) => {
+  let sizeStyles: string, formeStyle: string
 
   switch (size) {
     case 'small':
@@ -21,13 +27,23 @@ export const Avatar = ({ size = 'medium', src, alt }: Props) => {
       sizeStyles = 'w-[50px] h-[50px]'
       break
   }
+
+  switch (forme) {
+    case 'rond': //Default
+      formeStyle = 'rounded-full'
+      break
+    case 'carre':
+      formeStyle = 'rounded'
+      break
+  }
+
   return (
-    <div className={clsx(sizeStyles, 'bg-darkgray rounded-full relative')}>
+    <div className={clsx(sizeStyles, formeStyle, 'bg-darkgray relative')}>
       <Image
         fill
         src={src}
         alt={alt}
-        className="object-cover object-center rounded-full"
+        className={clsx(formeStyle, 'object-cover object-center')}
       />
     </div>
   )

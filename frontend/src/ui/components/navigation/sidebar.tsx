@@ -29,7 +29,7 @@ const Sidebar = () => {
         </div>
       </Link>
 
-      <nav className="flex min-w-[240px] flex-col gap-1 p-2">
+      <nav className="relative flex min-w-[240px] flex-col gap-1 p-2">
         <hr className="my-2 border-x-dark" />
         <div className="relative block w-full">
           <ActiveLink href="/">
@@ -141,7 +141,7 @@ const Sidebar = () => {
       </nav>
 
       {/*Section gestion de compte*/}
-      <div className="relative flex w-full px-4 py-4 mt-auto">
+      <div className="absolute bottom-3 flex w-full px-4 py-4 mt-auto">
         <div className="mr-12 flex items-center gap-8">
           <Avatar
             size="large"

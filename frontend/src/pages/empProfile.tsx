@@ -6,7 +6,7 @@ export default function EmpProfile() {
   return (
     <>
       <Seo
-        title="gestion du salarié"
+        title="Gestion du salarié"
         description="Page de gestion et de modification du salarié."
       />
       <div className="min-h-screen bg-bggray/50">

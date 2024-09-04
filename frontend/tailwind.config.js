@@ -17,7 +17,7 @@ module.exports = {
       yellow: '#F0950C',
       red: '#FB5454',
       bggray: '#ECEFF1',
-      bluegray800: '#37474f',
+      bluegray800: '#424242',
       bluegray900: '#263238',
     },
 

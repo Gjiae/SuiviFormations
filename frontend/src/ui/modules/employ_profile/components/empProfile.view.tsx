@@ -1,5 +1,7 @@
+import { Statuts } from '@/lib/status'
 import { Container } from '@/ui/components/container'
 import { Avatar } from '@/ui/design-system/avatar'
+import { Status } from '@/ui/design-system/status'
 import { Typography } from '@/ui/design-system/typography'
 
 export const EmpProfil = () => {
@@ -38,7 +40,45 @@ export const EmpProfil = () => {
         <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-2">
           <div>
             <Typography variant="h3">Informations sur le salarié</Typography>
-            <div></div>
+            <div className="flex items-center gap-4 mt-2">
+              <Typography variant="16Reg">Service :</Typography>
+              <Typography variant="16Reg" theme="gray">
+                QSE
+              </Typography>
+            </div>
+            <div className="flex items-center gap-4 mt-2">
+              <Typography variant="16Reg">Métier :</Typography>
+              <Typography variant="16Reg" theme="gray">
+                Animateur QSE
+              </Typography>
+            </div>
+            <div className="flex items-center gap-4 mt-2">
+              <Typography variant="16Reg">Date d'embauche :</Typography>
+              <Typography variant="16Reg" theme="gray">
+                01 Décembre 2023
+              </Typography>
+            </div>
+            <div className="flex items-center gap-4 mt-2">
+              <Typography variant="16Reg">Email :</Typography>
+              <Typography variant="16Reg" theme="gray">
+                v.gazzoli@becchampagne.fayat.com
+              </Typography>
+            </div>
+            <div className="flex items-center gap-4 mt-2">
+              <Typography variant="16Reg">Mobile :</Typography>
+              <Typography variant="16Reg" theme="gray">
+                06 46 80 65 41
+              </Typography>
+            </div>
+            <div className="flex items-center gap-4 mt-2">
+              <Status status="validated" />
+            </div>
+            <div className="flex items-center gap-4 mt-2">
+              <Status status="tree-months" />
+            </div>
+            <div className="flex items-center gap-4 mt-2">
+              <Status status="outdated" />
+            </div>
           </div>
           <div>
             <Typography variant="h3">Formations du salarié</Typography>

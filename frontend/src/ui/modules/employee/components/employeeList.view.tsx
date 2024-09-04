@@ -7,6 +7,7 @@ import { FaEdit, FaSearch } from 'react-icons/fa'
 import { FaRegTrashCan } from 'react-icons/fa6'
 import { listofEmployees } from '@/data/data_employee'
 import { formatDate } from '@/utiles/formatDates'
+import Tooltip from '@/utiles/tooltip'
 
 export const EmployeeList = () => {
   return (
@@ -92,10 +93,14 @@ export const EmployeeList = () => {
                   <td className="py-3 px-5 border-b border-bordergray">
                     <div className="flex items-center gap-4">
                       <Link href="/" className="text-yellow">
-                        <FaEdit />
+                        <Tooltip tooltip="Modifier">
+                          <FaEdit />
+                        </Tooltip>
                       </Link>
                       <Link href="/" className="text-red">
-                        <FaRegTrashCan />
+                        <Tooltip tooltip="Supprimer">
+                          <FaRegTrashCan />
+                        </Tooltip>
                       </Link>
                     </div>
                   </td>

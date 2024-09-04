@@ -97,6 +97,7 @@ module.exports = {
     },
 
     borderRadius: {
+      soft: '5px',
       DEFAULT: '10px',
       semi: '30px',
       full: '9999px',

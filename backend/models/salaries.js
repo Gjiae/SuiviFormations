@@ -9,4 +9,4 @@ const salariesSchema = mongoose.Schema({
   email: { type: String, required: false },
 })
 
-module.exports = mongoose.model('Salaries', salariesSchema)
+module.exports = mongoose.model('salaries', salariesSchema)

@@ -4,9 +4,13 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const mongoString = process.env.DATABASE_URL
 
-const routes = require('./routes/routes')
+const Formations = require('./routes/gestionFormations')
+const Salaries = require('./routes/gestionSalaries')
+const Historique = require('./routes/gestionHistorique')
 
-app.use('/api', routes)
+app.use('/api/formations', Formations)
+app.use('/api/salaries', Salaries)
+app.use('/api/historique', Historique)
 
 mongoose.connect(mongoString)
 const database = mongoose.connection
@@ -14,9 +18,8 @@ const database = mongoose.connection
 database.on('error', (error) => {
   console.log(error)
 })
-
 database.once('connected', () => {
-  console.log('Database Connected')
+  console.log('Database connectée')
 })
 
 const normalizePort = (val) => {

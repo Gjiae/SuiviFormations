@@ -1,16 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const Model = require('../models/salaries')
+const HistoriqueModel = require('../models/historique')
 
 //Méthode POST - Permet de créer un salarié
 router.post('/post', async (req, res) => {
-  const data = new Model({
-    name: req.body.name,
-    surname: req.body.surname,
-    service: req.body.service,
-    metier: req.body.metier,
-    embauche: req.body.embauche,
-    email: req.body.email,
+  const data = new HistoriqueModel({
+    idSalarie: req.body.idSalarie,
+    idFormation: req.body.idFormation,
+    realisation: req.body.realisation,
+    expiration: req.body.expiration,
   })
 
   try {
@@ -24,7 +22,7 @@ router.post('/post', async (req, res) => {
 // GetAll API - Permet de récupérer toutes les données de la DB
 router.get('/getAll', async (req, res) => {
   try {
-    const data = await Model.find()
+    const data = await HistoriqueModel.find()
     res.json(data)
   } catch (error) {
     res.status(500).json({ message: error.message })
@@ -34,7 +32,7 @@ router.get('/getAll', async (req, res) => {
 //Get by ID - Récupère un salarié via son ID unique
 router.get('/getOne/:id', async (req, res) => {
   try {
-    const data = await Model.findById(req.params.id)
+    const data = await HistoriqueModel.findById(req.params.id)
     res.json(data)
   } catch (error) {
     res.status(500).json({ message: error.message })
@@ -48,7 +46,7 @@ router.patch('/update/:id', async (req, res) => {
     const updatedData = req.body
     const options = { new: true }
 
-    const result = await Model.findByIdAndUpdate(id, updatedData, options)
+    const result = await HistoriqueModel.findByIdAndUpdate(id, updatedData, options)
 
     res.send(result)
   } catch (error) {
@@ -60,7 +58,7 @@ router.patch('/update/:id', async (req, res) => {
 router.delete('/delete/:id', async (req, res) => {
   try {
     const id = req.params.id
-    const data = await Model.findByIdAndDelete(id)
+    const data = await HistoriqueModel.findByIdAndDelete(id)
     res.send(`Document with ${data.name} has been deleted..`)
   } catch (error) {
     res.status(400).json({ message: error.message })

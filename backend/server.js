@@ -19,7 +19,7 @@ database.on('error', (error) => {
   console.log(error)
 })
 database.once('connected', () => {
-  console.log('Database connectée')
+  console.log('Base de donnée connectée')
 })
 
 const normalizePort = (val) => {

@@ -22,7 +22,7 @@ export const Breadcrumbs = () => {
           weight="medium"
           className={clsx(
             path !== lastSegment ? 'text-textcolor' : 'text-dark',
-            'transition-all hover:text-primary hover:opacity-100'
+            'capitalize transition-all hover:text-primary hover:opacity-100'
           )}
         >
           {path}

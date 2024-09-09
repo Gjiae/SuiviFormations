@@ -21,8 +21,14 @@ export const Navigation = ({}: Props) => {
               variant="ico"
               icon={{ icon: FaBell }}
             />
-            <Button size="small">Connexion</Button>
-            <Button size="small" variant="secondary">
+            <Button baseUrl="/connexion" size="small">
+              Connexion
+            </Button>
+            <Button
+              baseUrl="/connexion/inscription"
+              size="small"
+              variant="secondary"
+            >
               Rejoindre
             </Button>
           </div>

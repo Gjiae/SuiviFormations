@@ -1,5 +1,6 @@
 import { Layout } from '@/ui/components/layout/layout'
 import { Seo } from '@/ui/components/seo'
+import { RegisterContainer } from '@/ui/modules/authentification/register/register.container'
 
 export default function Inscription() {
   return (
@@ -9,7 +10,9 @@ export default function Inscription() {
         description="Page d'inscription du site"
       />
       <div className="min-h-screen bg-bggray/50">
-        <Layout></Layout>
+        <Layout>
+          <RegisterContainer />
+        </Layout>
       </div>
     </>
   )

@@ -1,6 +1,6 @@
 import { Layout } from '@/ui/components/layout/layout'
 import { Seo } from '@/ui/components/seo'
-import { RegisterContainer } from '@/ui/modules/authentification/register/register.container'
+import { RegisterContainer } from '@/ui/modules/authentication/register/register.container'
 
 export default function Inscription() {
   return (

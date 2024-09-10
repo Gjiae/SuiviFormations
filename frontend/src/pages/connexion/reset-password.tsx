@@ -1,6 +1,6 @@
 import { Layout } from '@/ui/components/layout/layout'
 import { Seo } from '@/ui/components/seo'
-import { ResetContainer } from '@/ui/modules/authentification/reset-password/reset.container'
+import { ResetContainer } from '@/ui/modules/authentication/reset-password/reset.container'
 
 export default function ResetPassword() {
   return (

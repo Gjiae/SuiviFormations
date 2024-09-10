@@ -4,8 +4,13 @@ import { Typography } from '@/ui/design-system/typography'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ResetForm } from './reset.form'
+import { FormsType } from '@/types/forms'
 
-export const ResetView = () => {
+interface Props {
+  form: FormsType
+}
+
+export const ResetView = ({ form }: Props) => {
   return (
     <Container className="grid grid-cols-2 gap-20">
       <div className="flex items-center">
@@ -30,7 +35,7 @@ export const ResetView = () => {
               </Typography>
             </Link>
           </div>
-          <ResetForm />
+          <ResetForm form={form} />
         </Box>
       </div>
     </Container>

@@ -2,14 +2,31 @@ import { Container } from '@/ui/components/container'
 import { Avatar } from '@/ui/design-system/avatar'
 import { Search } from '@/ui/design-system/search'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaEdit, FaSearch } from 'react-icons/fa'
 import { FaRegTrashCan } from 'react-icons/fa6'
-import { listofEmployees } from '@/data/data_employee'
 import { formatDate } from '@/utiles/formatDates'
 import Tooltip from '@/utiles/tooltip'
+import axios from 'axios'
 
 export const EmployeeList = () => {
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/api/salaries/getAll'
+        )
+        setUsers(response.data)
+      } catch (error) {
+        console.error('Error fetching users:', error)
+      }
+    }
+
+    fetchUsers()
+  }, [])
+
   return (
     <Container className="mt-12 mb-8 flex flex-col gap-12">
       <div className="relative flex flex-col bg-clip-border rounded bg-white text-gray-700 shadow-md">
@@ -49,8 +66,8 @@ export const EmployeeList = () => {
               </tr>
             </thead>
             <tbody>
-              {listofEmployees.map((listofEmployees, index) => (
-                <tr key={index}>
+              {users.map((user) => (
+                <tr key={user._id}>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <div className="flex items-center gap-4">
                       <Avatar
@@ -61,20 +78,20 @@ export const EmployeeList = () => {
                       />
                       <div>
                         <p className="block antialiased leading-normal text-dark text-16Reg">
-                          {listofEmployees.name}
+                          {user.surname} {user.name}
                         </p>
                         <p className="block antialiased text-12Reg text-textcolor">
-                          {listofEmployees.email}
+                          {user.email}
                         </p>
                       </div>
                     </div>
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <p className="block antialiased text-16Reg text-dark">
-                      {listofEmployees.service}
+                      {user.service}
                     </p>
                     <p className="block antialiased text-12Reg text-textcolor">
-                      {listofEmployees.metier}
+                      {user.metier}
                     </p>
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">
@@ -87,7 +104,7 @@ export const EmployeeList = () => {
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <p className="block antialiased text-16Reg text-dark">
-                      {formatDate(listofEmployees.embauche)}
+                      {formatDate(user.embauche)}
                     </p>
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">

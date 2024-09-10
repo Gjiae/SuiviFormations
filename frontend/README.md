@@ -7,3 +7,5 @@ https://console.firebase.google.com/project/suivi-des-formations/hosting/sites/s
 https://www.figma.com/design/c7UgA9KblLvsdU3agp7aqg/Coders-Monkeys-public-App-Design?node-id=1-2&node-type=FRAME&t=HTDs5wp1VQTweeCE-0
 
 https://www.freecodecamp.org/news/build-a-restful-api-using-node-express-and-mongodb/
+
+https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb

@@ -3,14 +3,12 @@ const app = require('./app')
 const mongoose = require('mongoose')
 require('dotenv').config()
 const mongoString = process.env.DATABASE_URL
+const cors = require('cors')
+const corsOptions = {
+  origin: ['http://localhost:3001'],
+}
 
-const Formations = require('./routes/gestionFormations')
-const Salaries = require('./routes/gestionSalaries')
-const Historique = require('./routes/gestionHistorique')
-
-app.use('/api/formations', Formations)
-app.use('/api/salaries', Salaries)
-app.use('/api/historique', Historique)
+app.use(cors(corsOptions))
 
 mongoose.connect(mongoString)
 const database = mongoose.connection
@@ -22,47 +20,13 @@ database.once('connected', () => {
   console.log('Base de donnée connectée')
 })
 
-const normalizePort = (val) => {
-  const port = parseInt(val, 10)
-
-  if (isNaN(port)) {
-    return val
-  }
-  if (port >= 0) {
-    return port
-  }
-  return false
-}
-const port = normalizePort(process.env.PORT || '3000')
+const port = process.env.PORT || 3000
 app.set('port', port)
-
-const errorHandler = (error) => {
-  if (error.syscall !== 'listen') {
-    throw error
-  }
-  const address = server.address()
-  const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges.')
-      process.exit(1)
-      break
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use.')
-      process.exit(1)
-      break
-    default:
-      throw error
-  }
-}
 
 const server = http.createServer(app)
 
-server.on('error', errorHandler)
 server.on('listening', () => {
-  const address = server.address()
-  const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port
-  console.log('Listening on ' + bind)
+  console.log("Serveur lancé à l'adresse http://localhost:" + port)
 })
 
 server.listen(port)

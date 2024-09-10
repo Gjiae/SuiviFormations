@@ -1,6 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const Salarie = require('./models/salaries')
+const Formations = require('./routes/gestionFormations')
+const Salaries = require('./routes/gestionSalaries')
+const Historique = require('./routes/gestionHistorique')
 
 const app = express()
 
@@ -19,23 +21,8 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json())
 
-app.post('/api/stuff', (req, res, next) => {
-  delete req.body._id
-  const salarie = new Salaries({
-    ...req.body,
-  })
-  salarie
-    .save()
-    .then(() =>
-      res.status(201).json({ message: 'Nouveau salarié enregistré !' })
-    )
-    .catch((error) => res.status(400).json({ error }))
-})
-
-app.use('/api/stuff', (req, res, next) => {
-  Salarie.find()
-    .then((salaries) => res.status(200).json(salaries))
-    .catch((error) => res.status(400).json({ error }))
-})
+app.use('/api/formations', Formations)
+app.use('/api/salaries', Salaries)
+app.use('/api/historique', Historique)
 
 module.exports = app

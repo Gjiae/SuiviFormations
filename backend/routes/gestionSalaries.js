@@ -1,23 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const SalarieModel = require('../models/salaries')
+const SalariesCtrl = require('../controllers/salaries')
+
+router.post('/', salariesCtrl.createSalarie)
 
 //Méthode POST - Permet de créer un salarié
 router.post('/post', async (req, res) => {
-  const data = new SalarieModel({
-    name: req.body.name,
-    surname: req.body.surname,
-    service: req.body.service,
-    metier: req.body.metier,
-    embauche: req.body.embauche,
-    email: req.body.email,
-  })
-
   try {
-    const dataToSave = await data.save()
-    res.status(200).json(dataToSave)
+    const newSalarie = new SalarieModel(req.body)
+    await newSalarie.save()
+    res.status(200).send(newSalarie)
   } catch (error) {
-    res.status(400).json({ message: error.message })
+    res.status(400).send({ message: error.message })
   }
 })
 
@@ -48,7 +43,11 @@ router.patch('/update/:id', async (req, res) => {
     const updatedData = req.body
     const options = { new: true }
 
-    const result = await SalarieModel.findByIdAndUpdate(id, updatedData, options)
+    const result = await SalarieModel.findByIdAndUpdate(
+      id,
+      updatedData,
+      options
+    )
 
     res.send(result)
   } catch (error) {

@@ -5,7 +5,6 @@ import Link from 'next/link'
 import React from 'react'
 import { FaEdit, FaSearch } from 'react-icons/fa'
 import { FaRegTrashCan } from 'react-icons/fa6'
-import { listofEmployees } from '@/data/data_employee'
 import { formatDate } from '@/utiles/formatDates'
 
 export const FormationsList = () => {
@@ -47,7 +46,7 @@ export const FormationsList = () => {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            {/* <tbody>
               {listofEmployees.map((listofEmployees, index) => (
                 <tr key={index}>
                   <td className="py-3 px-5 border-b border-bordergray">
@@ -101,7 +100,7 @@ export const FormationsList = () => {
                   </td>
                 </tr>
               ))}
-            </tbody>
+            </tbody> */}
           </table>
         </div>
       </div>

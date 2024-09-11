@@ -11,8 +11,21 @@ import {
 } from 'react-icons/fa6'
 import Link from 'next/link'
 import { ActiveLink } from './active-link'
+import { useEffect, useState } from 'react'
 
 const Sidebar = () => {
+  let headers: any
+  const [Authentified, setAuthentified] = useState(null)
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setAuthentified(user)
+      //console.log(user.token)
+      headers = { Authorization: `Bearer ${user.token}` }
+    }
+  }, [])
+
   return (
     <aside className="sticky top-4 inset-0 z-50 ml-4 h-[calc(100vh-32px)] w-72 flex-col bg-white shadow-lg text-dark border border-bordergray rounded p-4">
       <Link href="/">
@@ -140,21 +153,25 @@ const Sidebar = () => {
         </div>
       </nav>
 
-      {/*Section gestion de compte*/}
-      <div className="absolute bottom-3 flex w-full px-4 py-4 mt-auto">
-        <div className="mr-12 flex items-center gap-8">
-          <Avatar
-            size="large"
-            src="/assets/images/md.png"
-            alt="Avatar de Valentin Gazzoli"
-          />
-          <div>
-            <a href="#" className="font-medium text-dark hover:text-primary">
-              Mon compte
-            </a>
+      {Authentified ? (
+        /*Section gestion de compte*/
+        <div className="absolute bottom-3 flex w-full px-4 py-4 mt-auto">
+          <div className="mr-12 flex items-center gap-8">
+            <Avatar
+              size="large"
+              src="/assets/images/md.png"
+              alt="Avatar de Valentin Gazzoli"
+            />
+            <div>
+              <a href="#" className="font-medium text-dark hover:text-primary">
+                Mon compte
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        ''
+      )}
     </aside>
   )
 }

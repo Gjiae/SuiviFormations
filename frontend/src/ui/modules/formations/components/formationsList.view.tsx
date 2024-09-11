@@ -2,18 +2,55 @@ import { Container } from '@/ui/components/container'
 import { Avatar } from '@/ui/design-system/avatar'
 import { Search } from '@/ui/design-system/search'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaEdit, FaSearch } from 'react-icons/fa'
 import { FaRegTrashCan } from 'react-icons/fa6'
 import { formatDate } from '@/utiles/formatDates'
+import axios from 'axios'
 
 export const FormationsList = () => {
+  let headers: any
+  const [Authentified, setAuthentified] = useState(null)
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setAuthentified(user)
+      //console.log(user.token)
+      headers = { Authorization: `Bearer ${user.token}` }
+    }
+  }, [])
+
+  const [Formations, setFormations] = useState([
+    {
+      _id: '',
+      title: '',
+    },
+  ])
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/api/formations',
+          {
+            headers,
+          }
+        )
+        setFormations(response.data)
+      } catch (error) {
+        console.error('Error fetching users:', error)
+      }
+    }
+
+    fetchUsers()
+  }, [])
+
   return (
     <Container className="mt-12 mb-8 flex flex-col gap-12">
       <div className="relative flex flex-col bg-clip-border rounded bg-white text-gray-700 shadow-md">
         <div className="flex justify-between items-center bg-gradient-to-tr from-bluegray800 to-bluegray900 bg-clip-border mx-4 rounded overflow-hidden text-white shadow-dark shadow-lg -mt-6 mb-8 p-4">
           <h6 className="block items-center antialiased font-semibold text-white">
-            Liste des salariés
+            Liste des formations
           </h6>
           <Search icon={{ icon: FaSearch }} />
         </div>
@@ -23,32 +60,19 @@ export const FormationsList = () => {
               <tr>
                 <th className="border-b border-bordergray py-3 px-5 text-left">
                   <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
-                    Nom / Prénom
+                    ID
                   </p>
                 </th>
                 <th className="border-b border-bordergray py-3 px-5 text-left">
                   <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
-                    Service
+                    Intitulé de formation
                   </p>
-                </th>
-                <th className="border-b border-bordergray py-3 px-5 text-left">
-                  <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
-                    Formations
-                  </p>
-                </th>
-                <th className="border-b border-bordergray py-3 px-5 text-left">
-                  <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
-                    Date d'embauche
-                  </p>
-                </th>
-                <th className="border-b border-bordergray py-3 px-5 text-left">
-                  <p className="block antialiased text-12Reg font-bold uppercase text-textcolor" />
                 </th>
               </tr>
             </thead>
-            {/* <tbody>
-              {listofEmployees.map((listofEmployees, index) => (
-                <tr key={index}>
+            <tbody>
+              {Formations.map((formation) => (
+                <tr key={formation._id}>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <div className="flex items-center gap-4">
                       <Avatar
@@ -59,48 +83,19 @@ export const FormationsList = () => {
                       />
                       <div>
                         <p className="block antialiased leading-normal text-dark text-16Reg">
-                          {listofEmployees.name}
-                        </p>
-                        <p className="block antialiased text-12Reg text-textcolor">
-                          {listofEmployees.email}
+                          {formation._id}
                         </p>
                       </div>
                     </div>
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <p className="block antialiased text-16Reg text-dark">
-                      {listofEmployees.service}
+                      {formation.title}
                     </p>
-                    <p className="block antialiased text-12Reg text-textcolor">
-                      {listofEmployees.metier}
-                    </p>
-                  </td>
-                  <td className="py-3 px-5 border-b border-bordergray">
-                    <p className="block antialiased text-16Reg text-dark">
-                      6 formations
-                    </p>
-                    <p className="block antialiased text-12Reg text-textcolor">
-                      en cours de validité
-                    </p>
-                  </td>
-                  <td className="py-3 px-5 border-b border-bordergray">
-                    <p className="block antialiased text-16Reg text-dark">
-                      {formatDate(listofEmployees.embauche)}
-                    </p>
-                  </td>
-                  <td className="py-3 px-5 border-b border-bordergray">
-                    <div className="flex items-center gap-4">
-                      <Link href="/" className="text-yellow">
-                        <FaEdit />
-                      </Link>
-                      <Link href="/" className="text-red">
-                        <FaRegTrashCan />
-                      </Link>
-                    </div>
                   </td>
                 </tr>
               ))}
-            </tbody> */}
+            </tbody>
           </table>
         </div>
       </div>

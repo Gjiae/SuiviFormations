@@ -10,15 +10,36 @@ import Tooltip from '@/utiles/tooltip'
 import axios from 'axios'
 
 export const EmployeeList = () => {
-  const [users, setUsers] = useState([])
+  let headers: any
+  const [Authentified, setAuthentified] = useState(null)
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setAuthentified(user)
+      //console.log(user.token)
+      headers = { Authorization: `Bearer ${user.token}` }
+    }
+  }, [])
 
+  const [Salaries, setSalaries] = useState([
+    {
+      _id: '',
+      name: '',
+      surname: '',
+      service: '',
+      metier: '',
+      embauche: '',
+      email: '',
+    },
+  ])
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(
-          'http://localhost:3000/api/salaries/getAll'
-        )
-        setUsers(response.data)
+        const response = await axios.get('http://localhost:3000/api/salaries', {
+          headers,
+        })
+        setSalaries(response.data)
       } catch (error) {
         console.error('Error fetching users:', error)
       }
@@ -66,8 +87,8 @@ export const EmployeeList = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
-                <tr key={user._id}>
+              {Salaries.map((salarie) => (
+                <tr key={salarie._id}>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <div className="flex items-center gap-4">
                       <Avatar
@@ -78,20 +99,20 @@ export const EmployeeList = () => {
                       />
                       <div>
                         <p className="block antialiased leading-normal text-dark text-16Reg">
-                          {user.surname} {user.name}
+                          {salarie.surname} {salarie.name}
                         </p>
                         <p className="block antialiased text-12Reg text-textcolor">
-                          {user.email}
+                          {salarie.email}
                         </p>
                       </div>
                     </div>
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <p className="block antialiased text-16Reg text-dark">
-                      {user.service}
+                      {salarie.service}
                     </p>
                     <p className="block antialiased text-12Reg text-textcolor">
-                      {user.metier}
+                      {salarie.metier}
                     </p>
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">
@@ -104,7 +125,7 @@ export const EmployeeList = () => {
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <p className="block antialiased text-16Reg text-dark">
-                      {formatDate(user.embauche)}
+                      {formatDate(salarie.embauche)}
                     </p>
                   </td>
                   <td className="py-3 px-5 border-b border-bordergray">

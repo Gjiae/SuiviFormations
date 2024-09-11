@@ -8,4 +8,4 @@ https://www.figma.com/design/c7UgA9KblLvsdU3agp7aqg/Coders-Monkeys-public-App-De
 
 https://www.freecodecamp.org/news/build-a-restful-api-using-node-express-and-mongodb/
 
-https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb
+https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb/6466506-creez-des-utilisateurs

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const Formations = require('./routes/gestionFormations')
 const Salaries = require('./routes/gestionSalaries')
 const Historique = require('./routes/gestionHistorique')
-
+const userRoutes = require('./routes/user')
 const app = express()
 
 app.use((req, res, next) => {
@@ -24,5 +24,6 @@ app.use(bodyParser.json())
 app.use('/api/formations', Formations)
 app.use('/api/salaries', Salaries)
 app.use('/api/historique', Historique)
+app.use('/api/auth', userRoutes)
 
 module.exports = app

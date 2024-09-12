@@ -64,7 +64,7 @@ const Sidebar = () => {
             <p className="block mr-auto leading-tight">Formations</p>
           </ActiveLink>
         </div>
-        <div className="relative block w-full">
+        {/*        <div className="relative block w-full">
           <div
             role="button"
             className="flex items-center w-full p-0 leading-tight"
@@ -123,6 +123,7 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
+*/}
 
         <hr className="my-2 border-x-dark" />
 

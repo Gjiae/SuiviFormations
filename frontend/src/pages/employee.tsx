@@ -1,6 +1,8 @@
 import { Layout } from '@/ui/components/layout/layout'
 import { Seo } from '@/ui/components/seo'
+import { Button } from '@/ui/design-system/button'
 import { EmployeeContainer } from '@/ui/modules/employee/employee.container'
+import { FaPlus } from 'react-icons/fa6'
 
 export default function Employee() {
   return (
@@ -12,6 +14,9 @@ export default function Employee() {
       <div className="min-h-screen bg-bggray/50">
         <Layout>
           <EmployeeContainer />
+          <div className="fixed bottom-8 right-8 z-40">
+            <Button variant="ico" icon={{ icon: FaPlus }} />
+          </div>
         </Layout>
       </div>
     </>

@@ -1,8 +1,8 @@
-const SalarieModel = require('../models/salaries')
+const salariesSchema = require('../models/salaries')
 
 //Méthode POST - Permet de créer un salarié
 exports.createSalarie = (req, res) => {
-  const newSalarie = new SalarieModel(req.body)
+  const newSalarie = new salariesSchema(req.body)
   newSalarie
     .save()
     .then(() => {
@@ -19,7 +19,7 @@ exports.createSalarie = (req, res) => {
 
 // GetAll API - Permet de récupérer toutes les données de la DB
 exports.getAll = async (req, res) => {
-  await SalarieModel.find()
+  await salariesSchema.find()
     .then((data) => {
       res.status(201).json(data)
     })
@@ -32,7 +32,7 @@ exports.getAll = async (req, res) => {
 
 //Get by ID - Récupère un salarié via son ID unique
 exports.getOne = async (req, res) => {
-  await SalarieModel.findById(req.params.id)
+  await salariesSchema.findById(req.params.id)
     .then((data) => {
       res.status(201).json(data)
     })
@@ -45,7 +45,7 @@ exports.getOne = async (req, res) => {
 
 //Update by ID - Permet de modifier les infos d'un salarié
 exports.update = async (req, res) => {
-  await SalarieModel.updateOne({ _id: req.params.id }, req.body)
+  await salariesSchema.updateOne({ _id: req.params.id }, req.body)
     .then((data) => {
       res.status(201).json(data)
     })
@@ -58,7 +58,7 @@ exports.update = async (req, res) => {
 
 //Supprimer un salarié de la DB par son ID unique
 exports.delete = async (req, res) => {
-  await SalarieModel.deleteOne({ _id: req.params.id })
+  await salariesSchema.deleteOne({ _id: req.params.id })
     .then(() => {
       res.status(201).json({ message: 'Le salarié a bien été supprimé' })
     })

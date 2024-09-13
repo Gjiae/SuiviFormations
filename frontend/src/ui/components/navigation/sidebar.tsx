@@ -51,7 +51,7 @@ const Sidebar = () => {
             </div>
             <p className="block mr-auto leading-tight">Tableau de bord</p>
           </ActiveLink>
-          <ActiveLink href="/employee">
+          <ActiveLink href="/frontend/src/pages/salaries/employee">
             <div className="grid mr-4">
               <FaUsers />
             </div>

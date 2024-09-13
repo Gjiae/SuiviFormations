@@ -20,3 +20,12 @@ export interface LoginFormFieldsType {
 export interface ResetFormFieldsType {
   email: string
 }
+
+export interface AddEmployeeFormFieldsType {
+  name: string
+  surname: string
+  service: string
+  metier: string
+  email: string
+}
+

@@ -18,9 +18,7 @@ export default function Salaries() {
         <Layout>
           <EmployeeContainer />
           <Modal isOpen={true} onClose={() => alert(222)}>
-            <Box>
               <AddEmployeeContainer/>
-            </Box>
           </Modal>
           <div className="fixed bottom-8 right-8 z-40">
             <Button variant="ico" icon={{ icon: FaPlus }} />

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Button } from '@/ui/design-system/button'
 
 interface Props {
   isOpen: boolean
@@ -18,13 +17,8 @@ export const Modal = ({ children, isOpen, onClose }: Props) => {
   }, [onClose])
   if (!isOpen) return null
   return (
-    <>
-      <div className="display-flex justify-center items-center">
-        <div>
-          <Button action={onClose}>Fermer</Button>
+      <div className="fixed mt-32 left-1/3 w-2/5">
           {children}
-        </div>
       </div>
-    </>
   )
 }

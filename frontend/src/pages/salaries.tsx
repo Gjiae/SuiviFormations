@@ -4,10 +4,21 @@ import { Button } from '@/ui/design-system/button'
 import { EmployeeContainer } from '@/ui/modules/employee/employee.container'
 import { FaPlus } from 'react-icons/fa6'
 import { Modal } from '@/ui/components/modal/modal'
-import { Box } from '@/ui/design-system/box'
 import { AddEmployeeContainer } from '@/ui/modules/employee/addEmployee/addEmployee.container'
+import { useState } from 'react'
 
 export default function Salaries() {
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       <Seo
@@ -17,11 +28,11 @@ export default function Salaries() {
       <div className="min-h-screen bg-bggray/50">
         <Layout>
           <EmployeeContainer />
-          <Modal isOpen={true} onClose={() => alert(222)}>
+          <Modal isOpen={modalOpen} onClose={closeModal}>
               <AddEmployeeContainer/>
           </Modal>
           <div className="fixed bottom-8 right-8 z-40">
-            <Button variant="ico" icon={{ icon: FaPlus }} />
+            <Button variant="ico" icon={{ icon: FaPlus }} action={openModal}/>
           </div>
         </Layout>
       </div>

@@ -11,10 +11,19 @@ export const Modal = ({ children, isOpen, onClose }: Props) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose()
+
       }
     }
-    window.addEventListener('keydown', handleKeyDown)
-  }, [onClose])
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null
   return (
       <div className="fixed mt-32 left-1/3 w-2/5">

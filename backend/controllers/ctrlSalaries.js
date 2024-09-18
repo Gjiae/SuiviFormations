@@ -58,7 +58,7 @@ exports.update = async (req, res) => {
 
 //Supprimer un salarié de la DB par son ID unique
 exports.delete = async (req, res) => {
-  await salariesSchema.deleteOne({ _id: req.params.id })
+  await salariesSchema.findByIdAndDelete({ _id: req.params.id })
     .then(() => {
       res.status(201).json({ message: 'Le salarié a bien été supprimé' })
     })

@@ -8,20 +8,9 @@ import { FaRegTrashCan } from 'react-icons/fa6'
 import Tooltip from '@/utiles/tooltip'
 import axios from 'axios'
 import deleteEmployeeApi from '@/api/deleteEmployee'
-import { formatDate } from '@/utiles/formatDates'
 import { Typography } from '@/ui/design-system/typography'
-import TableRow from '@mui/material/TableRow'
-import TableCell from '@mui/material/TableCell'
-import IconButton from '@mui/material/IconButton'
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import Collapse from '@mui/material/Collapse'
-import Box from '@mui/material/Box'
-import Table from '@mui/material/Table'
-import TableHead from '@mui/material/TableHead'
-import TableBody from '@mui/material/TableBody'
-import TableContainer from '@mui/material/TableContainer'
-import Paper from '@mui/material/Paper'
+import { getstateColor } from '@/utiles/getStateColor'
+import { formatDate } from '@/utiles/formatDates'
 
 const onDelete = async (_id: any) => {
   try {
@@ -47,7 +36,7 @@ export const EmployeeList = () => {
         idFormation: '',
         title: '',
         realisation: '',
-        expiration: ''
+        expiration: new Date
       }]
     }
   ])
@@ -64,8 +53,6 @@ export const EmployeeList = () => {
     fetchUsers()
   }, [])
 
-  const [open, setOpen] = React.useState(false)
-
   return (
     <Container className="mt-12 mb-8 flex flex-col gap-12">
       <div className="relative flex flex-col bg-clip-border rounded bg-white text-gray-700 shadow-md">
@@ -76,101 +63,124 @@ export const EmployeeList = () => {
           </h6>
           <Search icon={{ icon: FaSearch }} />
         </div>
-        <TableContainer component={Paper}>
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  className="border-b border-bordergray py-3 px-5 text-left text-12Reg font-bold uppercase text-textcolor">Nom
-                  / Prénom</TableCell>
-                <TableCell
-                  className="border-b border-bordergray py-3 px-5 text-left text-12Reg font-bold uppercase text-textcolor">Service</TableCell>
-                <TableCell
-                  className="border-b border-bordergray py-3 px-5 text-left text-12Reg font-bold uppercase text-textcolor">Formations</TableCell>
-                <TableCell
-                  className="border-b border-bordergray py-3 px-5 text-left text-12Reg font-bold uppercase text-textcolor"></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {Salaries.map((salarie) => (
-                <React.Fragment key={salarie._id}>
-                  <TableRow key={salarie._id}>
-                    <TableCell className="py-3 px-5">
-                      <div className="flex items-center gap-4">
-                        <Avatar
-                          size="large"
-                          forme="carre"
-                          src="/assets/images/md.png"
-                          alt="Avatar de Valentin Gazzoli" />
-                        <div>
-                          <Typography variant="16Reg" theme="black">
-                            {salarie.surname} {salarie.name}
-                          </Typography>
-                          <Typography variant="12Reg" theme="gray">
-                            {salarie.email}
-                          </Typography>
-                        </div>
+        <div className="p-6 px-0 pt-0 pb-2 grid grid-cols-10">
+          <div className="col-span-7">
+            <table className="w-full min-w-[640px] border-separate border-spacing-y-1">
+              <thead>
+              <tr>
+                <th className="border-b border-bordergray py-3 px-5 text-left">
+                  <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
+                    Nom / Prénom
+                  </p>
+                </th>
+                <th className="border-b border-bordergray py-3 px-5 text-left">
+                  <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
+                    Service
+                  </p>
+                </th>
+                <th className="border-b border-bordergray py-3 px-5 text-left">
+                  <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
+                    Formations
+                  </p>
+                </th>
+                <th className="border-b border-bordergray py-3 px-5 text-left">
+                  <p className="block antialiased text-12Reg font-bold uppercase text-textcolor" />
+                </th>
+              </tr>
+              </thead>
+              {Salaries.map((salarie, index) => (
+                // eslint-disable-next-line react/jsx-key
+                <tbody>
+                <tr key={index}>
+                  <td className="px-5">
+                    <div className="flex items-center gap-4">
+                      <Avatar
+                        size="large"
+                        forme="carre"
+                        src="/assets/images/md.png"
+                        alt="Avatar de Valentin Gazzoli" />
+                      <div>
+                        <Typography variant="16Reg" theme="black">
+                          {salarie.surname} {salarie.name}
+                        </Typography>
+                        <Typography variant="12Reg" theme="gray">
+                          {salarie.email}
+                        </Typography>
                       </div>
-                    </TableCell>
-                    <TableCell className="py-3 px-5">
-                      <Typography variant="16Reg" theme="black">
-                        {salarie.service}
-                      </Typography>
-                      <Typography variant="12Reg" theme="gray">
-                        {salarie.metier}
-                      </Typography>
-                    </TableCell>
-                    <TableCell className="py-3 px-5">
-                      <Typography variant="16Reg" theme="black">
-                        {salarie.formations?.length > 0 ? salarie.formations?.length : 0} formations
-                      </Typography>
-                      <Typography variant="12Reg" theme="gray">
-                        en cours de validité
-                      </Typography>
-                    </TableCell>
-                    <TableCell className="py-3 px-5">
-                      <div className="flex items-center gap-4">
-                        <Link href="/" className="text-yellow">
-                          <Tooltip tooltip="Modifier">
-                            <FaEdit />
-                          </Tooltip>
-                        </Link>
-                        <div onClick={() => onDelete(salarie._id)} className="cursor-pointer">
-                          <Tooltip tooltip="Supprimer">
-                            <FaRegTrashCan className="text-red" />
-                          </Tooltip>
-                        </div>
+                    </div>
+                  </td>
+                  <td className="py-3 px-5">
+                    <Typography variant="16Reg" theme="black">
+                      {salarie.service}
+                    </Typography>
+                    <Typography variant="12Reg" theme="gray">
+                      {salarie.metier}
+                    </Typography>
+                  </td>
+                  <td className="py-3 px-5">
+                    <Typography variant="16Reg" theme="black">
+                      {salarie.formations?.length > 0 ? salarie.formations?.length : 0} formations
+                    </Typography>
+                    <Typography variant="12Reg" theme="gray">
+                      en cours de validité
+                    </Typography>
+                  </td>
+                  <td className="py-3 px-5">
+                    <div className="flex items-center gap-4">
+                      <Link href="/" className="text-yellow">
+                        <Tooltip tooltip="Modifier">
+                          <FaEdit />
+                        </Tooltip>
+                      </Link>
+                      <div onClick={() => onDelete(salarie._id)} className="cursor-pointer">
+                        <Tooltip tooltip="Supprimer">
+                          <FaRegTrashCan className="text-red" />
+                        </Tooltip>
                       </div>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                      <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
-                          <Typography variant="h3" component="div">
-                            History
-                          </Typography>
-                          <Table size="small" aria-label="purchases">
-                            <TableHead>
-                              <TableRow>
-                                <TableCell>Date</TableCell>
-                                <TableCell>Customer</TableCell>
-                                <TableCell align="right">Amount</TableCell>
-                                <TableCell align="right">Formations</TableCell>
-                                <TableCell align="right"></TableCell>
-                              </TableRow>
-                            </TableHead>
-                            <span>Coucou</span>
-                          </Table>
-                        </Box>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow>
-                </React.Fragment>
+                    </div>
+                  </td>
+                </tr>
+                {salarie.formations?.map((formation, idfor) => (
+                  <tr key={idfor}>
+                    <td colSpan={4} className="px-5">
+                      <div className={`py-3 px-5 rounded ${getstateColor(formation?.expiration)}`}>
+                        {salarie.formations?.length > 0 ? (
+                          <div className="flex items-center gap-4">
+                            <div className="w-1/3">
+                              <Typography variant="12Med">{formation.title}</Typography>
+                            </div>
+                            <div className="">
+                              <Typography variant="12Med">Réalisation : {formatDate(formation.realisation)}</Typography>
+                            </div>
+                            <div className="px-5">
+                              <Typography variant="12Med">Expiration : {formatDate(formation.expiration)}</Typography>
+                            </div>
+                            <div className="px-5 flex items-center gap-2">
+                              <Link href="/" className="text-yellow">
+                                <Tooltip tooltip="Modifier">
+                                  <FaEdit />
+                                </Tooltip>
+                              </Link>
+                              <div onClick={() => onDelete(salarie._id)} className="cursor-pointer">
+                                <Tooltip tooltip="Supprimer">
+                                  <FaRegTrashCan className="text-red" />
+                                </Tooltip>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="no-data"> No activity found! </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                </tbody>
               ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+            </table>
+          </div>
+          <div className="col-span-3">2</div>
+        </div>
       </div>
     </Container>
   )

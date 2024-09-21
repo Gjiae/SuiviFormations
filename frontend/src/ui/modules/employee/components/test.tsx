@@ -52,8 +52,6 @@ export const EmployeeList = () => {
     fetchUsers()
   }, [])
 
-  const [open, setOpen] = React.useState(false)
-
   return (
     <Container className="mt-12 mb-8 flex flex-col gap-12">
       <div className="relative flex flex-col bg-clip-border rounded bg-white text-gray-700 shadow-md">

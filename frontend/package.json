@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mui/styles": "^6.1.0",
     "axios": "^1.7.7",
     "clsx": "^2.1.1",
     "material-react-table": "^3.0.1",

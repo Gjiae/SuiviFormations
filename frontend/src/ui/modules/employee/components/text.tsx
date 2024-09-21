@@ -1,137 +1,196 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Container } from '@/ui/components/container'
+import { Avatar } from '@/ui/design-system/avatar'
+import { Search } from '@/ui/design-system/search'
+import Link from 'next/link'
+import React, { useState, useEffect } from 'react'
+import { FaEdit, FaSearch } from 'react-icons/fa'
+import { FaRegTrashCan } from 'react-icons/fa6'
+import Tooltip from '@/utiles/tooltip'
+import axios from 'axios'
+import deleteEmployeeApi from '@/api/deleteEmployee'
+import { formatDate } from '@/utiles/formatDates'
+import { Typography } from '@/ui/design-system/typography'
+import TableRow from '@mui/material/TableRow'
+import TableCell from '@mui/material/TableCell'
+import Collapse from '@mui/material/Collapse'
+import Box from '@mui/material/Box'
+import Table from '@mui/material/Table'
+import TableHead from '@mui/material/TableHead'
+import TableBody from '@mui/material/TableBody'
+import TableContainer from '@mui/material/TableContainer'
+import deleteFormationAPI from '@/api/deleteFormation'
+import { makeStyles } from '@mui/styles'
+import { textAlign } from '@mui/system'
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-  price: number,
-) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
-  };
+const onDeleteEmpl = async (_id: any) => {
+  try {
+    const res = await deleteEmployeeApi.deleteEmployee(_id)
+    if (res.data.success) {
+      alert(res.data.msg)
+    }
+  } catch (err) {
+    console.error(err)
+  }
 }
 
-function Row(props: { row: ReturnType<typeof createData> }) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
+const onDeleteForm = async (_id: any) => {
+  try {
+    const res = await deleteFormationAPI.deleteFormation(_id)
+    if (res.data.success) {
+      alert(res.data.msg)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
 
+export const EmployeeList = () => {
+  const [Salaries, setSalaries] = useState([
+    {
+      _id: '',
+      name: '',
+      surname: '',
+      service: '',
+      metier: '',
+      email: '',
+      formations: [{
+        idFormation: '',
+        title: '',
+        realisation: '',
+        expiration: ''
+      }]
+    }
+  ])
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/salaries')
+        setSalaries(response.data)
+      } catch (error) {
+        console.error('Error fetching users:', error)
+      }
+    }
+    fetchUsers()
+  }, [])
+
+  const [open, setOpen] = React.useState(false)
   return (
-    <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
-        </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                History
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+    <Container className="mt-12 mb-8 flex flex-col gap-12">
+      <div className="relative flex flex-col bg-clip-border rounded bg-white shadow-md">
+        <div
+          className="flex justify-between items-center bg-gradient-to-tr from-bluegray800 to-bluegray900 bg-clip-border mx-4 rounded overflow-hidden text-white shadow-dark shadow-lg -mt-6 mb-8 p-4">
+          <h6 className="block items-center antialiased font-semibold text-white">
+            Liste des salariés
+          </h6>
+          <Search icon={{ icon: FaSearch }} />
+        </div>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  className="border-b border-bordergray py-3 px-5 text-left text-12Reg font-bold uppercase text-textcolor">Nom
+                  / Prénom</TableCell>
+                <TableCell
+                  className="border-b border-bordergray py-3 px-5 text-left text-12Reg font-bold uppercase text-textcolor">Service</TableCell>
+                <TableCell
+                  className="border-b border-bordergray py-3 px-5 text-left text-12Reg font-bold uppercase text-textcolor">Formations</TableCell>
+                <TableCell
+                  className="border-b border-bordergray py-3 px-5 text-left text-12Reg font-bold uppercase text-textcolor"></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Salaries.map((salarie) => (
+                <React.Fragment key={salarie._id}>
+                  <TableRow key={salarie._id}>
+                    <TableCell onClick={() => setOpen(!open)} className="py-3 px-5">
+                      <div className="flex items-center gap-4">
+                        <Avatar
+                          size="large"
+                          forme="carre"
+                          src="/assets/images/md.png"
+                          alt="Avatar de Valentin Gazzoli" />
+                        <div>
+                          <Typography variant="16Reg" theme="black">
+                            {salarie.surname} {salarie.name}
+                          </Typography>
+                          <Typography variant="12Reg" theme="gray">
+                            {salarie.email}
+                          </Typography>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-3 px-5">
+                      <Typography variant="16Reg" theme="black">
+                        {salarie.service}
+                      </Typography>
+                      <Typography variant="12Reg" theme="gray">
+                        {salarie.metier}
+                      </Typography>
+                    </TableCell>
+                    <TableCell className="py-3 px-5">
+                      <Typography variant="16Reg" theme="black">
+                        {salarie.formations?.length > 0 ? salarie.formations?.length : 0} formations
+                      </Typography>
+                      <Typography variant="12Reg" theme="gray">
+                        en cours de validité
+                      </Typography>
+                    </TableCell>
+                    <TableCell className="py-3 px-5">
+                      <div className="flex items-center gap-4">
+                        <Link href="/" className="text-yellow">
+                          <Tooltip tooltip="Modifier">
+                            <FaEdit />
+                          </Tooltip>
+                        </Link>
+                        <div onClick={() => onDeleteEmpl(salarie._id)} className="cursor-pointer">
+                          <Tooltip tooltip="Supprimer">
+                            <FaRegTrashCan className="text-red" />
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
-export default function CollapsibleTable() {
-  return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+                  <TableRow>
+                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+                      <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box sx={{ margin: 1 }}>
+                          {salarie.formations?.map((formation) => (
+                            <Table size="small" key={formation.idFormation}>
+                              <TableBody>
+                                <TableRow className="collaps-viewer py-3 px-5 mb-3 bg-white rounded shadow border-l-4 border-red flex justify-between items-center">
+                                  <TableCell>{formation.title}</TableCell>
+                                  <TableCell>{formatDate(formation.realisation)}</TableCell>
+                                  <TableCell>{formatDate(formation.expiration)}</TableCell>
+                                  <TableCell className="py-3 px-5">
+                                    <div className="flex items-center gap-4">
+                                      <Link href="/" className="text-yellow">
+                                        <Tooltip tooltip="Modifier">
+                                          <FaEdit />
+                                        </Tooltip>
+                                      </Link>
+                                      <div onClick={() => onDeleteForm(formation.idFormation)} className="cursor-pointer">
+                                        <Tooltip tooltip="Supprimer">
+                                          <FaRegTrashCan className="text-red" />
+                                        </Tooltip>
+                                      </div>
+                                    </div>
+                                  </TableCell>
+                                </TableRow>
+                              </TableBody>
+                            </Table>
+                          ))}
+                        </Box>
+                      </Collapse>
+                    </TableCell>
+                  </TableRow>
+                </React.Fragment>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </Container>
+  )
 }

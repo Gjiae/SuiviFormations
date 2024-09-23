@@ -3,7 +3,7 @@ import { Avatar } from '@/ui/design-system/avatar'
 import Link from 'next/link'
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import { FaEdit, FaSearch, FaDownload } from 'react-icons/fa'
-import { FaRegTrashCan } from 'react-icons/fa6'
+import { FaRegTrashCan, FaPlus } from 'react-icons/fa6'
 import Tooltip from '@/utiles/tooltip'
 import axios from 'axios'
 import deleteEmployeeApi from '@/api/deleteEmployee'
@@ -11,6 +11,17 @@ import { Typography } from '@/ui/design-system/typography'
 import { getstateColor } from '@/utiles/getStateColor'
 import { formatDate } from '@/utiles/formatDates'
 import deleteFormationAPI from '@/api/deleteFormation'
+
+const onAddFormation = async (_id: any) => {
+  try {
+    const res = await deleteEmployeeApi.deleteEmployee(_id)
+    if (res.data.success) {
+      alert(res.data.msg)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 const onDeleteSalarie = async (_id: any) => {
   try {
@@ -176,6 +187,11 @@ export const EmployeeList = () => {
                 </td>
                 <td className="py-3 px-5">
                   <div className="flex items-center gap-4">
+                    <div onClick={() => onAddFormation(salaried._id)} className="cursor-pointer">
+                      <Tooltip tooltip="Ajouter une formation">
+                        <FaPlus className="text-secondary" />
+                      </Tooltip>
+                    </div>
                     <Link href="/" className="text-yellow">
                       <Tooltip tooltip="Modifier">
                         <FaEdit />
@@ -193,7 +209,7 @@ export const EmployeeList = () => {
                 salaried.formations?.map((formation, indexForm) => (
                   <tr key={indexForm}>
                     <td colSpan={4} className="px-10">
-                      <div className={`py-3 px-8 rounded ${getstateColor(formation?.expiration)}`}>
+                    <div className={`py-3 px-8 rounded ${getstateColor(formation?.expiration)}`}>
                         {salaried.formations?.length > 0 ? (
                           <div className="items-center grid grid-cols-8">
                             <div className="col-span-3">

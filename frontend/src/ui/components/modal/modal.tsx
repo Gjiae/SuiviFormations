@@ -11,7 +11,6 @@ export const Modal = ({ children, isOpen, onClose }: Props) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose()
-
       }
     }
 

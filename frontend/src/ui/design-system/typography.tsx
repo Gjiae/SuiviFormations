@@ -11,6 +11,7 @@ interface Props {
     | '16Med'
     | '14Med'
     | '12Med'
+    | '12Bold'
   component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'div' | 'p' | 'span'
   theme?:
     | 'black'
@@ -65,6 +66,8 @@ export const Typography = ({
     case '12Med':
       variantStyles = 'text-12Med'
       break
+    case '12Bold':
+      variantStyles = 'text-12Bold'
   }
 
   switch (theme) {

@@ -94,6 +94,14 @@ module.exports = {
           fontWeight: '600',
         },
       ],
+      '12Bold': [
+        '12px',
+        {
+          lineHeight: '15px',
+          letterSpacing: '0px',
+          fontWeight: '800',
+        },
+      ],
     },
 
     borderRadius: {

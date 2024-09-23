@@ -5,10 +5,10 @@ interface Props {
   variant?: 'basique' | 'white'
   icon?: IconProps
   iconPosition?: 'left' | 'right'
-  action?: Function
+  onChange?: Function
 }
 
-export const Search = ({ variant = 'basique', icon }: Props) => {
+export const Search = ({ variant = 'basique', icon, onChange = () => {} }: Props) => {
   let variantStyles: string = ''
 
   switch (variant) {
@@ -21,13 +21,20 @@ export const Search = ({ variant = 'basique', icon }: Props) => {
       break
   }
 
+  const handleChange = () => {
+    if (onChange) {
+      onChange()
+    }
+  }
+
   return (
     <>
       <div className={clsx(icon && 'flex items-center gap-2')}>
         <input
-          type="seacrh"
+          type="search"
           className={clsx(variantStyles, 'outline-none px-8')}
           placeholder="Chercher..."
+          onChange={handleChange}
         />
         <div className="absolute text-textcolor px-2">
           {icon && <icon.icon />}

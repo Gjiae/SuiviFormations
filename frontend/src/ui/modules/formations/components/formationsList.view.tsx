@@ -2,7 +2,7 @@ import { Container } from '@/ui/components/container'
 import { Avatar } from '@/ui/design-system/avatar'
 import { Search } from '@/ui/design-system/search'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { FaEdit, FaSearch } from 'react-icons/fa'
 import { FaRegTrashCan } from 'react-icons/fa6'
 import { formatDate } from '@/utiles/formatDates'
@@ -45,25 +45,50 @@ export const FormationsList = () => {
     fetchUsers()
   }, [])
 
+  const [filterText, setFilter] = useState('')
+
+  const filterProducts = (event: ChangeEvent<HTMLInputElement>) => {
+    setFilter(event.target.value.toUpperCase())
+  }
+
+  const filtered = React.useMemo(() => {
+    return Formations.filter(formation => {
+      return filterText.length > 0 ?
+        formation.title.toString().toLowerCase().includes(filterText.toLowerCase())
+        : true
+    })
+  }, [filterText, Formations])
+
   return (
     <Container className="mt-12 mb-8 flex flex-col gap-12">
       <div className="relative flex flex-col bg-clip-border rounded bg-white text-gray-700 shadow-md">
-        <div className="flex justify-between items-center bg-gradient-to-tr from-bluegray800 to-bluegray900 bg-clip-border mx-4 rounded overflow-hidden text-white shadow-dark shadow-lg -mt-6 mb-8 p-4">
+        <div
+          className="flex justify-between items-center bg-gradient-to-tr from-bluegray800 to-bluegray900 bg-clip-border mx-4 rounded overflow-hidden text-white shadow-dark shadow-lg -mt-6 mb-8 p-4">
           <h6 className="block items-center antialiased font-semibold text-white">
             Liste des formations
           </h6>
-          <Search icon={{ icon: FaSearch }} />
+          <div className="flex items-center gap-2">
+            <input
+              type="search"
+              className="bg-gray h-[40px] w-[300px] text-16Med text-textcolor border border-stroke rounded outline-none px-8"
+              placeholder="Chercher une formation..."
+              onChange={filterProducts}
+            />
+            <div className="absolute text-textcolor px-2">
+              {<FaSearch />}
+            </div>
+          </div>
         </div>
         <div className="p-6 px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
-              <tr>
-                <th className="border-b border-bordergray py-3 px-5 text-left">
-                  <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
-                    ID
-                  </p>
-                </th>
-                <th className="border-b border-bordergray py-3 px-5 text-left">
+            <tr>
+              <th className="border-b border-bordergray py-3 px-5 text-left">
+                <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
+                  ID
+                </p>
+              </th>
+              <th className="border-b border-bordergray py-3 px-5 text-left">
                   <p className="block antialiased text-12Reg font-bold uppercase text-textcolor">
                     Intitulé de formation
                   </p>
@@ -71,7 +96,7 @@ export const FormationsList = () => {
               </tr>
             </thead>
             <tbody>
-              {Formations.map((formation) => (
+              {filtered.map((formation) => (
                 <tr key={formation._id}>
                   <td className="py-3 px-5 border-b border-bordergray">
                     <div className="flex items-center gap-4">

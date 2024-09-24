@@ -11,6 +11,8 @@ import { Typography } from '@/ui/design-system/typography'
 import { getstateColor } from '@/utiles/getStateColor'
 import { formatDate } from '@/utiles/formatDates'
 import deleteFormationAPI from '@/api/deleteFormation'
+import { Modal } from '@/ui/components/modal/modal'
+import { AddFormationContainer } from '@/ui/modules/employee/addFormation/addFormation.container'
 
 const onAddFormation = async (_id: any) => {
   try {

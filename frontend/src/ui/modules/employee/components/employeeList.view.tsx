@@ -14,10 +14,7 @@ import deleteFormationAPI from '@/api/deleteFormation'
 
 const onAddFormation = async (_id: any) => {
   try {
-    const res = await deleteEmployeeApi.deleteEmployee(_id)
-    if (res.data.success) {
-      alert(res.data.msg)
-    }
+    console.log("Il faut que je crée la fenêtre d'ajout de formation.")
   } catch (err) {
     console.error(err)
   }

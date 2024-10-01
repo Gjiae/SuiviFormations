@@ -65,7 +65,7 @@ export const FormationsList = () => {
         <div
           className="flex justify-between items-center bg-gradient-to-tr from-bluegray800 to-bluegray900 bg-clip-border mx-4 rounded overflow-hidden text-white shadow-dark shadow-lg -mt-6 mb-8 p-4">
           <h6 className="block items-center antialiased font-semibold text-white">
-            Liste des formations
+            Liste des formations existantes
           </h6>
           <div className="flex items-center gap-2">
             <input

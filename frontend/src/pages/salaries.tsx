@@ -6,18 +6,19 @@ import { FaPlus } from 'react-icons/fa6'
 import { Modal } from '@/ui/components/modal/modal'
 import { AddEmployeeContainer } from '@/ui/modules/employee/addEmployee/addEmployee.container'
 import { useState } from 'react'
+import ToolTip from '@/utiles/tooltip'
 
 export default function Salaries() {
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false)
 
   const openModal = () => {
-    setModalOpen(true);
-  };
+    setModalOpen(true)
+  }
 
   const closeModal = () => {
-    setModalOpen(false);
-  };
+    setModalOpen(false)
+  }
 
   return (
     <>
@@ -29,10 +30,12 @@ export default function Salaries() {
         <Layout>
           <EmployeeContainer />
           <Modal isOpen={modalOpen} onClose={closeModal}>
-              <AddEmployeeContainer/>
+            <AddEmployeeContainer />
           </Modal>
           <div className="fixed bottom-8 right-8 z-40">
-            <Button variant="ico" icon={{ icon: FaPlus }} action={openModal}/>
+            <ToolTip id="100" tooltip="Ajouter un salarié">
+              <Button variant="ico" icon={{ icon: FaPlus }} action={openModal} />
+            </ToolTip>
           </div>
         </Layout>
       </div>

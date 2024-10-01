@@ -11,8 +11,6 @@ import { Typography } from '@/ui/design-system/typography'
 import { getstateColor } from '@/utiles/getStateColor'
 import { formatDate } from '@/utiles/formatDates'
 import deleteFormationAPI from '@/api/deleteFormation'
-import { Modal } from '@/ui/components/modal/modal'
-import { AddFormationContainer } from '@/ui/modules/employee/addFormation/addFormation.container'
 
 const onAddFormation = async (_id: any) => {
   try {
@@ -187,17 +185,17 @@ export const EmployeeList = () => {
                 <td className="py-3 px-5">
                   <div className="flex items-center gap-4">
                     <div onClick={() => onAddFormation(salaried._id)} className="cursor-pointer">
-                      <Tooltip tooltip="Ajouter une formation">
+                      <Tooltip id='1' tooltip="Ajouter une formation">
                         <FaPlus className="text-secondary" />
                       </Tooltip>
                     </div>
                     <Link href="/" className="text-yellow">
-                      <Tooltip tooltip="Modifier">
+                      <Tooltip id='2' tooltip="Modifier">
                         <FaEdit />
                       </Tooltip>
                     </Link>
                     <div onClick={() => onDeleteSalarie(salaried._id)} className="cursor-pointer">
-                      <Tooltip tooltip="Supprimer">
+                      <Tooltip id='3' tooltip="Supprimer">
                         <FaRegTrashCan className="text-red" />
                       </Tooltip>
                     </div>
@@ -223,17 +221,17 @@ export const EmployeeList = () => {
                             </div>
                             <div className="justify-end flex items-center gap-2 col-span-1">
                               <Link href="/" className="text-secondary">
-                                <Tooltip tooltip="Accéder au fichier">
+                                <Tooltip id='10' tooltip="Accéder au fichier">
                                   <FaDownload />
                                 </Tooltip>
                               </Link>
                               <Link href="/" className="text-yellow">
-                                <Tooltip tooltip="Modifier">
+                                <Tooltip id='20' tooltip="Modifier">
                                   <FaEdit />
                                 </Tooltip>
                               </Link>
                               <div onClick={() => onDeleteFormation(salaried._id)} className="cursor-pointer">
-                                <Tooltip tooltip="Supprimer">
+                                <Tooltip id='30' tooltip="Supprimer">
                                   <FaRegTrashCan className="text-red" />
                                 </Tooltip>
                               </div>

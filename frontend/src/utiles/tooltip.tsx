@@ -1,35 +1,27 @@
-import { FC, ReactNode, useRef } from 'react'
+import { ReactNode } from 'react'
+import { Tooltip } from 'react-tooltip'
 
 interface Props {
   children: ReactNode
   tooltip?: string
+  id: string
+  position?: 'top' | 'top-start' | 'top-end' | 'right' | 'right-start' | 'right-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end'
 }
 
-const ToolTip: FC<Props> = ({ children, tooltip }): JSX.Element => {
-  const tooltipRef = useRef<HTMLSpanElement>(null)
-  const container = useRef<HTMLDivElement>(null)
+export const ToolTip = ({ id, children, tooltip, position = 'top' }: Props) => {
+
 
   return (
-    <div
-      ref={container}
-      onMouseEnter={({ clientX }) => {
-        if (!tooltipRef.current || !container.current) return
-        const { left } = container.current.getBoundingClientRect()
-
-        tooltipRef.current.style.left = clientX - left + 'px'
-      }}
-      className="group relative inline-block"
-    >
-      {children}
-      {tooltip ? (
-        <span
-          ref={tooltipRef}
-          className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition bg-bluegray800 text-white p-2 rounded-soft absolute top-full mt-2 whitespace-nowrap"
-        >
-          {tooltip}
-        </span>
-      ) : null}
-    </div>
+    <>
+      <a data-tooltip-id={id}>
+        {children}
+      </a>
+      <Tooltip
+        id={id}
+        content={tooltip}
+        place={position}
+      />
+    </>
   )
 }
 

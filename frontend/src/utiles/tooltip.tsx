@@ -10,17 +10,16 @@ interface Props {
 
 export const ToolTip = ({ id, children, tooltip, position = 'top' }: Props) => {
 
-
   return (
     <>
-      <a data-tooltip-id={id}>
+      <span data-tooltip-id={id}>
         {children}
-      </a>
+      </span>
       <Tooltip
         id={id}
         content={tooltip}
         place={position}
-      />
+      ></Tooltip>
     </>
   )
 }

@@ -14,7 +14,7 @@ import deleteFormationAPI from '@/api/deleteFormation'
 
 const onAddFormation = async (_id: any) => {
   try {
-    console.log("Il faut que je crée la fenêtre d'ajout de formation.")
+    console.log('Il faut que je crée la fenêtre d\'ajout de formation.')
   } catch (err) {
     console.error(err)
   }
@@ -79,7 +79,7 @@ export const EmployeeList = () => {
     const isRowExpanded = currentExpandedRows === index ? index : null
     const newExpandedRows = isRowExpanded
       ? null
-      : (currentExpandedRows = index)
+      : index
     if (expandedRows !== index) {
       setExpandedRows(newExpandedRows)
     } else {
@@ -146,9 +146,8 @@ export const EmployeeList = () => {
             </tr>
             </thead>
             {filtered.map((salaried, index) => (
-              // eslint-disable-next-line react/jsx-key
-              <tbody>
-              <tr key={index} onClick={() => handleExpandRow(index)} className="cursor-pointer">
+              <tbody key={index}>
+              <tr onClick={() => handleExpandRow(index)} className="cursor-pointer">
                 <td className="px-5">
                   <div className="flex items-center gap-4">
                     <Avatar
@@ -185,17 +184,17 @@ export const EmployeeList = () => {
                 <td className="py-3 px-5">
                   <div className="flex items-center gap-4">
                     <div onClick={() => onAddFormation(salaried._id)} className="cursor-pointer">
-                      <Tooltip id='1' tooltip="Ajouter une formation">
+                      <Tooltip id="1" tooltip="Ajouter une formation">
                         <FaPlus className="text-secondary" />
                       </Tooltip>
                     </div>
                     <Link href="/" className="text-yellow">
-                      <Tooltip id='2' tooltip="Modifier">
+                      <Tooltip id="2" tooltip="Modifier">
                         <FaEdit />
                       </Tooltip>
                     </Link>
                     <div onClick={() => onDeleteSalarie(salaried._id)} className="cursor-pointer">
-                      <Tooltip id='3' tooltip="Supprimer">
+                      <Tooltip id="3" tooltip="Supprimer">
                         <FaRegTrashCan className="text-red" />
                       </Tooltip>
                     </div>
@@ -206,7 +205,7 @@ export const EmployeeList = () => {
                 salaried.formations?.map((formation, indexForm) => (
                   <tr key={indexForm}>
                     <td colSpan={4} className="px-10">
-                    <div className={`py-3 px-8 rounded ${getstateColor(formation?.expiration)}`}>
+                      <div className={`py-3 px-8 rounded ${getstateColor(formation?.expiration)}`}>
                         {salaried.formations?.length > 0 ? (
                           <div className="items-center grid grid-cols-8">
                             <div className="col-span-3">
@@ -221,17 +220,17 @@ export const EmployeeList = () => {
                             </div>
                             <div className="justify-end flex items-center gap-2 col-span-1">
                               <Link href="/" className="text-secondary">
-                                <Tooltip id='10' tooltip="Accéder au fichier">
+                                <Tooltip id="10" tooltip="Accéder au fichier">
                                   <FaDownload />
                                 </Tooltip>
                               </Link>
                               <Link href="/" className="text-yellow">
-                                <Tooltip id='20' tooltip="Modifier">
+                                <Tooltip id="20" tooltip="Modifier">
                                   <FaEdit />
                                 </Tooltip>
                               </Link>
                               <div onClick={() => onDeleteFormation(salaried._id)} className="cursor-pointer">
-                                <Tooltip id='30' tooltip="Supprimer">
+                                <Tooltip id="30" tooltip="Supprimer">
                                   <FaRegTrashCan className="text-red" />
                                 </Tooltip>
                               </div>

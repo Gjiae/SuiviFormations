@@ -6,6 +6,7 @@ const salariesSchema = mongoose.Schema({
   service: { type: String, required: false },
   metier: { type: String, required: false },
   email: { type: String, required: false },
+  sexe: { type: String, required: false },
   formations: {
     idFormation: { type: String, required: false },
     title: { type: String, required: false },

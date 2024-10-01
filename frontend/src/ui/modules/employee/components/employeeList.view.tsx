@@ -51,6 +51,7 @@ export const EmployeeList = () => {
       service: '',
       metier: '',
       email: '',
+      sexe: '',
       formations: [{
         idFormation: '',
         title: '',
@@ -152,9 +153,9 @@ export const EmployeeList = () => {
                   <div className="flex items-center gap-4">
                     <Avatar
                       size="large"
-                      forme="carre"
-                      src="/assets/images/md.png"
-                      alt="Avatar de Valentin Gazzoli" />
+                      forme="rond"
+                      src={salaried.sexe === 'M' ? "/assets/images/Profil_H.png" : "/assets/images/Profil_F.png" }
+                      alt={`Avatar de ${salaried.surname} ${salaried.name}`}/>
                     <div>
                       <Typography variant="16Reg" theme="black">
                         {salaried.name} {salaried.surname}

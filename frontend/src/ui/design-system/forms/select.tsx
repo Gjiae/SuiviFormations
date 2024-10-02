@@ -1,48 +1,42 @@
 import clsx from 'clsx'
 import { Typography } from '../typography'
+import { ReactNode } from 'react'
 
 interface Props {
   isLoading: boolean
-  placeholder: string
-  type?: 'text' | 'email' | 'password'
   register: any
   errors: any
   errorMsg?: string
   id: string
   required?: boolean
-  isAutoCompleted?: boolean
+  children: ReactNode
 }
 
-export const Input = ({
-  isLoading,
-  placeholder,
-  type = 'text',
-  register,
-  errors,
-  errorMsg = 'Ce champs doit être renseigné',
-  id,
-  required = true,
-  isAutoCompleted = false,
-}: Props) => {
+export const Select = ({
+                         isLoading,
+                         register,
+                         children,
+                         errors,
+                         errorMsg = 'Ce champs doit être renseigné',
+                         id,
+                         required = true
+                       }: Props) => {
   return (
     <div>
-      <input
-        type={type}
-        placeholder={placeholder}
+      <select
         className={clsx(
           isLoading && 'cursor-not-allowed',
-          errors[id] ? 'placeholder-red border-red' : '',
+          errors[id] ? 'placeholder:text-red border-red' : '',
           'border-bordergray focus:ring-primary w-full rounded border p-3 font-light focus:outline-none focus:ring-1'
         )}
         disabled={isLoading}
         {...register(id, {
           required: {
             value: required,
-            message: errorMsg,
-          },
+            message: errorMsg
+          }
         })}
-        autoComplete={isAutoCompleted ? 'on' : 'off'}
-      />
+      >{children}</select>
       {errors[id] && (
         <Typography variant="14Med" component="div" theme="danger">
           {errors[id]?.message}

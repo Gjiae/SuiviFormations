@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { IoCloseOutline } from "react-icons/io5";
 
 interface Props {
   isOpen: boolean
@@ -7,25 +8,11 @@ interface Props {
 }
 
 export const Modal = ({ children, isOpen, onClose }: Props) => {
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose()
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
 
   if (!isOpen) return null
   return (
-      <div className="fixed mt-32 left-1/3 w-2/5">
+      <div className={`flex items-center absolute left-1/3 w-2/5 h-screen`}>
+        <button className="text-dark absolute right-2 top-2" onClick={onClose}><IoCloseOutline size='1.5rem'/></button>
           {children}
       </div>
   )

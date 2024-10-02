@@ -4,6 +4,7 @@ const salariesSchema = require('../models/salaries')
 exports.createSalarie = async (req, res) => {
   try {
     const newSalarie = new salariesSchema(req.body);
+    console.log(newSalarie);
     const savedSalarie = await newSalarie.save();
     res.status(201).json({
       message: `${newSalarie.surname} ${newSalarie.name} ajouté avec succès`,
@@ -54,7 +55,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   await salariesSchema.findByIdAndDelete({ _id: req.params.id })
     .then(() => {
-      res.status(201).json({ message: 'Le salarié a bien été supprimé' })
+      res.status(201).json({"response": "success"})
     })
     .catch((error) => {
       res.status(400).json({

@@ -27,5 +27,6 @@ export interface AddEmployeeFormFieldsType {
   service: string
   metier: string
   email: string
+  sexe: string
 }
 

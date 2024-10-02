@@ -9,7 +9,7 @@ export default function Home() {
         title="Page d'accueil de l'application web de suivi des formations"
         description="Description..."
       />
-      <div className="min-h-screen bg-bggray/50">
+      <div className="bg-bggray/50 min-h-screen">
         <Layout>
           <HomepageContainer />
         </Layout>

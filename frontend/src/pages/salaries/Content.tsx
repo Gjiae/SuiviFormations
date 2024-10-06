@@ -2,7 +2,7 @@ import { AddEmployee } from '@/pages/salaries/addEmployee/addEmployee'
 import ToolTip from '@/utiles/tooltip'
 import { Button } from '@/ui/design-system/button'
 import { FaPlus, FaRegTrashCan } from 'react-icons/fa6'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Container } from '@/ui/components/container'
 import { FaDownload, FaEdit, FaSearch } from 'react-icons/fa'
 import { Typography } from '@/ui/design-system/typography'
@@ -61,18 +61,14 @@ export const EmployeeContent = () => {
     }
   ])
 
-  let getSalariesInfos: () => Promise<void>
-  getSalariesInfos = async () => {
+  const getSalariesInfos = async (): Promise<void> => {
     try {
-      const response = await axios.get('http://localhost:3000/api/salaries')
-      setSalaries(response.data)
+      const response = await axios.get('http://localhost:3000/api/salaries');
+      setSalaries(response.data);
     } catch (error) {
-      addAlert({ severity: 'error', message: { error }, timeout: 5 })
+      addAlert({ severity: 'error', message: { error }, timeout: 5 });
     }
-  }
-  useEffect(() => {
-    getSalariesInfos();
-  }, [getSalariesInfos]);
+  };
 
   const [expandedRows, setExpandedRows] = useState(null)
 

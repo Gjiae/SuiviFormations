@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = mongoose.Schema({
@@ -8,4 +8,5 @@ const userSchema = mongoose.Schema({
 
 userSchema.plugin(uniqueValidator)
 
+// eslint-disable-next-line no-undef
 module.exports = mongoose.model('User', userSchema)

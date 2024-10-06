@@ -14,9 +14,16 @@ import { formatDate } from '@/utiles/formatDates'
 import deleteEmployeeApi from '@/api/deleteEmployee'
 import deleteFormationAPI from '@/api/deleteFormation'
 import axios from 'axios'
+import AlertsProvider, { useAlerts } from '@/ui/components/alerts/alerts-context'
 
 export const EmployeeContent = () => {
   const [modalOpen, setModalOpen] = useState(false)
+  const { addAlert } = useAlerts()
+
+  const test = async () => {
+    const initialFormData = { severity: 'info', message: "Je suis une info", timeout: 5 }
+    addAlert({ initialFormData })
+  }
 
   const onDeleteSalarie = async (_id: string) => {
     try {
@@ -105,7 +112,7 @@ export const EmployeeContent = () => {
   }, [filterText, Salaries])
 
   return (
-    <>
+    <AlertsProvider>
       <Container className="mb-8 mt-12 flex flex-col gap-12">
         <div className="relative flex flex-col rounded bg-white bg-clip-border text-gray-700 shadow-md">
           <div
@@ -260,10 +267,9 @@ export const EmployeeContent = () => {
       <AddEmployee isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       <div className="fixed bottom-8 right-8 z-40">
         <ToolTip id="100" tooltip="Ajouter un salarié">
-          <Button variant="ico" icon={{ icon: FaPlus }} action={() => setModalOpen(true)} />
+          <Button variant="ico" icon={{ icon: FaPlus }} action={() => test()} />
         </ToolTip>
       </div>
-
-    </>
+    </AlertsProvider>
   )
 }

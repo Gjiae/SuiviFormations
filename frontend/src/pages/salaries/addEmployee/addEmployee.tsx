@@ -9,6 +9,7 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { Input } from '@/ui/design-system/forms/input'
 import { Select } from '@/ui/design-system/forms/select'
 import { Button } from '@/ui/design-system/button'
+import { useAlerts } from '@/ui/components/alerts/alerts-context'
 
 interface Props {
   isOpen: boolean
@@ -24,6 +25,7 @@ export const AddEmployee = ({ isOpen, onClose }: Props) => {
     handleSubmit,
   } = useForm<AddEmployeeFormFieldsType>()
 
+  const { addAlert } = useAlerts()
   const onSubmit: SubmitHandler<AddEmployeeFormFieldsType> = async (formData) => {
     setIsLoading(true)
     console.log('formData', formData)
@@ -35,6 +37,7 @@ export const AddEmployee = ({ isOpen, onClose }: Props) => {
       onClose()
       setIsLoading(false)
       window.location.reload()
+      addAlert({ severity: 'success', message: `${surname} ${name} a bien été ajouté`, timeout: 5 });
     } catch (exception) {
       alert("Erreur dans le chargement de la liste des salariés")
     }

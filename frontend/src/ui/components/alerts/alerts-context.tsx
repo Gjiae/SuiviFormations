@@ -1,17 +1,35 @@
-import { createContext, useContext, useRef, useState } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 import { Alert, AlertsWrapper } from "./alert";
 
-const AlertsContext = createContext('AlertsContext');
-const AlertsProvider = ({ children }) => {
-  const [alerts, setAlerts] = useState([]);
+interface Props {
+  children: React.ReactNode
+}
 
-  const addAlert = (alert) => {
-    const id = Math.random().toString(36).slice(2, 9) + new Date().getTime().toString(36);
-    setAlerts((prev) => [{ ...alert, id: id }, ...prev]);
+interface Alert {
+  message: string;
+  severity: 'success' | 'error' | 'info' | 'warning';
+  id?: string;
+}
+
+const AlertsContext = createContext('AlertsContext');
+const AlertsProvider = ({ children }: Props) => {
+  const [alerts, setAlerts] = useState<Alert[]>([]);
+
+  const generateUniqueId = (): string => {
+    return Math.random().toString(36).slice(2, 9) + new Date().getTime().toString(36);
+  }
+
+  const addAlert = (alert: Alert): string => {
+    const id = generateUniqueId();
+    setAlerts(prev => updateAlerts(prev, alert, id));
     return id;
   }
 
-  const dismissAlert = (id) => {
+  const updateAlerts = (prevAlerts: Alert[], alert: Alert, id: string): Alert[] => {
+    return [{ ...alert, id }, ...prevAlerts];
+  }
+
+  const dismissAlert = (id: string) => {
     setAlerts((prev) => prev.filter((alert) => alert.id !== id));
   }
 
@@ -28,22 +46,28 @@ const AlertsProvider = ({ children }) => {
 }
 
 export const useAlerts = () => {
-  const [alertIds, setAlertIds] = useState([]);
-  const alertIdsRef = useRef(alertIds);
+  const [alertIds, setAlertIds] = useState<number[]>([]);
+  const alertIdsRef = useRef<number[]>(alertIds);
+  // @ts-ignore
   const { addAlert, dismissAlert } = useContext(AlertsContext);
 
-  const addAlertWithId = (alert) => {
+  const updateAlertIds = (ids: number[]) => {
+    alertIdsRef.current = ids;
+    setAlertIds(ids);
+  };
+
+  const addAlertWithId = (alert: any) => {
     const id = addAlert(alert);
-    alertIdsRef.current.push(id);
-    setAlertIds(alertIdsRef.current);
-  }
+    const updatedIds = [...alertIdsRef.current, id];
+    updateAlertIds(updatedIds);
+  };
 
   const clearAlerts = () => {
-    alertIdsRef.current.forEach((id) => dismissAlert(id));
-    alertIdsRef.current = [];
-    setAlertIds([]);
-  }
+    alertIdsRef.current.forEach(dismissAlert);
+    updateAlertIds([]);
+  };
+
   return { addAlert: addAlertWithId, clearAlerts };
-}
+};
 
 export default AlertsProvider;

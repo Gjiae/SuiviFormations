@@ -14,29 +14,21 @@ import { formatDate } from '@/utiles/formatDates'
 import deleteEmployeeApi from '@/api/deleteEmployee'
 import deleteFormationAPI from '@/api/deleteFormation'
 import axios from 'axios'
-import AlertsProvider, { useAlerts } from '@/ui/components/alerts/alerts-context'
+import { useAlerts } from '@/ui/components/alerts/alerts-context'
 
 export const EmployeeContent = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const { addAlert } = useAlerts()
 
-  const test = async () => {
-    const initialFormData = { severity: 'info', message: "Je suis une info", timeout: 5 }
-    addAlert({ initialFormData })
-  }
-
   const onDeleteSalarie = async (_id: string) => {
     try {
       const res = await deleteEmployeeApi.deleteEmployee(_id)
       if (res.response === "success") {
-        console.log(res.response)
-        console.log(res.status)
-        alert("Le salarié a bien été supprimé de la liste !")
-        window.location.reload()
+        await getSalariesInfos()
+        addAlert({ severity: 'success', message: "Le salarié a bien été supprimé de la liste !", timeout: 5 });
       }
     } catch (err) {
-      console.log("pas marché")
-      console.error(err)
+      addAlert({ severity: 'error', message: "Une erreur a eu lieu lors de la suppression.", timeout: 5 });
     }
   }
 
@@ -69,18 +61,18 @@ export const EmployeeContent = () => {
     }
   ])
 
-  const getSalariesInfos = async () => {
+  let getSalariesInfos: () => Promise<void>
+  getSalariesInfos = async () => {
     try {
       const response = await axios.get('http://localhost:3000/api/salaries')
       setSalaries(response.data)
     } catch (error) {
-      console.log(error);
+      addAlert({ severity: 'error', message: { error }, timeout: 5 })
     }
   }
-
   useEffect(() => {
     getSalariesInfos();
-  }, []);
+  }, [getSalariesInfos]);
 
   const [expandedRows, setExpandedRows] = useState(null)
 
@@ -112,7 +104,7 @@ export const EmployeeContent = () => {
   }, [filterText, Salaries])
 
   return (
-    <AlertsProvider>
+    <>
       <Container className="mb-8 mt-12 flex flex-col gap-12">
         <div className="relative flex flex-col rounded bg-white bg-clip-border text-gray-700 shadow-md">
           <div
@@ -194,7 +186,7 @@ export const EmployeeContent = () => {
                   </td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-4">
-                      <div onClick={() => (console.log('Ajoute un formulaire d\'ajout de formation'))}
+                      <div onClick={() => (console.log("Ajoute un formulaire d'ajout de formation"))}
                            className="cursor-pointer">
                         <Tooltip id="1" tooltip="Ajouter une formation">
                           <FaPlus className="text-secondary" />
@@ -267,9 +259,9 @@ export const EmployeeContent = () => {
       <AddEmployee isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       <div className="fixed bottom-8 right-8 z-40">
         <ToolTip id="100" tooltip="Ajouter un salarié">
-          <Button variant="ico" icon={{ icon: FaPlus }} action={() => test()} />
+          <Button variant="ico" icon={{ icon: FaPlus }} action={() => setModalOpen(true)} />
         </ToolTip>
       </div>
-    </AlertsProvider>
+    </>
   )
 }

@@ -1,16 +1,15 @@
 import axios from 'axios'
-import { capitalize } from '@mui/material'
-const baseUrl = 'http://localhost:3000/api/formations'
+const baseUrl = 'http://localhost:3000/api/formations/'
 
-const addEmployee = async (informations: any) => {
-  const response = await axios.post(baseUrl, {
-    name: informations.name.toUpperCase(),
-    surname: capitalize(informations.surname),
-    service: informations.service,
-    metier: informations.metier,
-    email: informations.email,
+const addFormation = async (informations: { id: string; idFormation: string; title: string; realisation: string; expiration: string; }) => {
+  const response = await axios.patch(baseUrl + informations.id, {
+    idFormation: informations.idFormation,
+    title: informations.title,
+    realisation: informations.realisation,
+    expiration: informations.expiration,
   })
+  console.log(informations)
   return response.data
 }
 
-export default { addEmployee }
+export default { addFormation }

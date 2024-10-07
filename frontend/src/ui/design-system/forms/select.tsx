@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Typography } from '../typography'
-import { ReactNode } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 
 interface Props {
   isLoading: boolean
@@ -10,12 +10,14 @@ interface Props {
   id: string
   required?: boolean
   children: ReactNode
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Select = ({
                          isLoading,
                          register,
                          children,
+                         onChange,
                          errors,
                          errorMsg = 'Ce champs doit être renseigné',
                          id,
@@ -24,6 +26,7 @@ export const Select = ({
   return (
     <div>
       <select
+        onChange={onChange}
         className={clsx(
           isLoading && 'cursor-not-allowed',
           errors[id] ? 'placeholder:text-red border-red' : '',

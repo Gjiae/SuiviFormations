@@ -30,3 +30,10 @@ export interface AddEmployeeFormFieldsType {
   sexe: string
 }
 
+export interface AddFormationFormFieldsType {
+  id: string
+  idFormation: string
+  title: string
+  realisation: string
+  expiration: string
+}

@@ -2,7 +2,7 @@ import { AddEmployee } from '@/pages/salaries/addEmployee/addEmployee'
 import ToolTip from '@/utiles/tooltip'
 import { Button } from '@/ui/design-system/button'
 import { FaPlus, FaRegTrashCan } from 'react-icons/fa6'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Container } from '@/ui/components/container'
 import { FaDownload, FaEdit, FaSearch } from 'react-icons/fa'
 import { Typography } from '@/ui/design-system/typography'
@@ -15,9 +15,16 @@ import deleteEmployeeApi from '@/api/deleteEmployee'
 import deleteFormationAPI from '@/api/deleteFormation'
 import axios from 'axios'
 import { useAlerts } from '@/ui/components/alerts/alerts-context'
+import { AddFormation } from '@/pages/salaries/addFormation/addFormation'
 
 export const EmployeeContent = () => {
   const [modalOpen, setModalOpen] = useState(false)
+  const [ModalAddForm, setModalAdd] = useState(false)
+
+  const setModalAddForm = async (isOpen: boolean, _id: string) => {
+    setModalAdd(isOpen)
+  }
+
   const { addAlert } = useAlerts()
 
   const onDeleteSalarie = async (_id: string) => {
@@ -28,18 +35,19 @@ export const EmployeeContent = () => {
         addAlert({ severity: 'success', message: "Le salarié a bien été supprimé de la liste !", timeout: 5 });
       }
     } catch (err) {
-      addAlert({ severity: 'error', message: "Une erreur a eu lieu lors de la suppression.", timeout: 5 });
+      addAlert({ severity: 'error', message: `Une erreur a eu lieu lors de la suppression : ${err}`, timeout: 5 });
     }
   }
 
   const onDeleteFormation = async (_id: string) => {
     try {
       const res = await deleteFormationAPI.deleteFormation(_id)
-      if (res.data.success) {
-        alert(res.data.msg)
+      if (res.response === "success") {
+        await getSalariesInfos()
+        addAlert({ severity: 'success', message: "La formation a bien été supprimée de la liste !", timeout: 5 });
       }
     } catch (err) {
-      console.error(err)
+      addAlert({ severity: 'error', message: `Une erreur a eu lieu lors de la suppression : ${err}`, timeout: 5 });
     }
   }
 
@@ -69,6 +77,10 @@ export const EmployeeContent = () => {
       addAlert({ severity: 'error', message: { error }, timeout: 5 });
     }
   };
+
+  useEffect(() => {
+    getSalariesInfos()
+  }, [])
 
   const [expandedRows, setExpandedRows] = useState(null)
 
@@ -146,7 +158,7 @@ export const EmployeeContent = () => {
               </thead>
               {filtered.map((salaried, index) => (
                 <tbody key={index}>
-                <tr onClick={() => handleExpandRow(index)} className="cursor-pointer">
+                <tr onClick={() => handleExpandRow(index)} className={salaried.formations?.length > 0 ? "cursor-pointer" : "" }>
                   <td className="px-5">
                     <div className="flex items-center gap-4">
                       <Avatar
@@ -182,7 +194,7 @@ export const EmployeeContent = () => {
                   </td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-4">
-                      <div onClick={() => (console.log("Ajoute un formulaire d'ajout de formation"))}
+                      <div onClick={() => setModalAddForm(true, salaried._id)}
                            className="cursor-pointer">
                         <Tooltip id="1" tooltip="Ajouter une formation">
                           <FaPlus className="text-secondary" />
@@ -253,6 +265,7 @@ export const EmployeeContent = () => {
         </div>
       </Container>
       <AddEmployee isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <AddFormation isOpen={ModalAddForm} onClose={() => setModalAddForm(false, 'null')} />
       <div className="fixed bottom-8 right-8 z-40">
         <ToolTip id="100" tooltip="Ajouter un salarié">
           <Button variant="ico" icon={{ icon: FaPlus }} action={() => setModalOpen(true)} />

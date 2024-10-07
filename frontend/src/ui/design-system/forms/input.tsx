@@ -4,7 +4,7 @@ import { Typography } from '../typography'
 interface Props {
   isLoading: boolean
   placeholder: string
-  type?: 'text' | 'email' | 'password'
+  type?: 'text' | 'email' | 'password' | 'date'
   register: any
   errors: any
   errorMsg?: string

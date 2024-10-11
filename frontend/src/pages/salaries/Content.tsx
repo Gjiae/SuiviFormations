@@ -35,9 +35,10 @@ export const EmployeeContent = () => {
     }
   }
 
-  const onDeleteFormation = async (_id: string) => {
+  const onDeleteFormation = async (idSalaried: string, idFormation: string) => {
     try {
-      const res = await deleteFormationAPI.deleteFormation(_id)
+      const res = await deleteFormationAPI.deleteFormation({ idSalaried, idFormation })
+      console.log(res.response)
       if (res.response === "success") {
         await getSalariesInfos()
         addAlert({ severity: 'success', message: "La formation a bien été supprimée de la liste !", timeout: 5 });
@@ -241,7 +242,7 @@ export const EmployeeContent = () => {
                                     <FaEdit />
                                   </Tooltip>
                                 </Link>
-                                <div onClick={() => onDeleteFormation(salaried._id)} className="cursor-pointer">
+                                <div onClick={() => onDeleteFormation(salaried._id, formation.idFormation)} className="cursor-pointer">
                                   <Tooltip id="30" tooltip="Supprimer">
                                     <FaRegTrashCan className="text-red" />
                                   </Tooltip>

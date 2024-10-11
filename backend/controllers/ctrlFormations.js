@@ -10,7 +10,7 @@ exports.createFormation = async (req, res) => {
         title: req.body.title,
         realisation: req.body.realisation,
         expiration: req.body.expiration
-      },
+      }
     }
   })
     .then((data) => {
@@ -40,7 +40,9 @@ exports.getAll = async (req, res) => {
 exports.delete = async (req, res) => {
   await salariesSchema.updateOne({ _id: req.params.id }, {
     $pull: {
-      ...req.body.idFormation
+      formations: {
+        idFormation: req.body.idFormation
+      }
     }
   })
     .then(() => {

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Typography } from '../typography'
-import { ChangeEvent, ReactNode } from 'react'
+import React from 'react'
 
 interface Props {
   isLoading: boolean
@@ -9,8 +9,8 @@ interface Props {
   errorMsg?: string
   id: string
   required?: boolean
-  children: ReactNode
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+  children: React.ReactNode
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const Select = ({
@@ -23,6 +23,7 @@ export const Select = ({
                          id,
                          required = true
                        }: Props) => {
+
   return (
     <div>
       <select

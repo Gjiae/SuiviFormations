@@ -9,8 +9,8 @@ import { Input } from '@/ui/design-system/forms/input'
 import { Button } from '@/ui/design-system/button'
 import { useAlerts } from '@/ui/components/alerts/alerts-context'
 import addFormationAPI from '@/api/addFormation'
-import { Select } from '@/ui/design-system/forms/select'
 import axios from 'axios'
+import clsx from 'clsx'
 
 interface Props {
   isOpen: boolean
@@ -21,50 +21,58 @@ interface Props {
 export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const id: string = idSalaried
+  let idForm: any
+  const { addAlert } = useAlerts()
 
-  const [Formations, setFormations] = useState([
-    {
-      idFormation: '',
-      title: '',
-      realisation: '',
-      expiration: '',
-    }
-  ])
+  const [Formations, setFormations] = useState<
+    { _id: string; title: string }[]
+  >([])
 
   const getFormationsInfos = async (): Promise<void> => {
     try {
-      const response = await axios.get('http://localhost:3000/api/formations');
-      setFormations(response.data);
+      const response = await axios.get('http://localhost:3000/api/formations')
+      setFormations(response.data)
     } catch (error) {
-      //addAlert({ severity: 'error', message: { error }, timeout: 5 });
+      addAlert({ severity: 'error', message: { error }, timeout: 5 })
     }
-  };
+  }
 
   useEffect(() => {
     getFormationsInfos()
-  }, [])
+  }, [idSalaried])
 
   const {
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm<AddFormationFormFieldsType>()
+    reset
+  } = useForm<AddFormationFormFieldsType>({
+    defaultValues: {
+      title: 'Choisir la formation',
+      idFormation: '',
+      realisation: '',
+      expiration: ''
+    }})
 
-  const { addAlert } = useAlerts()
   const onSubmit: SubmitHandler<AddFormationFormFieldsType> = async (formData) => {
     setIsLoading(true)
-    const { idFormation, title, realisation, expiration } = formData
+    const { idFormation = idForm, title, realisation, expiration } = formData
     try {
       await addFormationAPI.addFormation({
         id, idFormation, title, realisation, expiration
       })
+      reset()
       onClose()
       setIsLoading(false)
+      addAlert({ severity: 'success', message: `${title} a bien été ajoutée`, timeout: 5 })
       window.location.reload()
-      addAlert({ severity: 'success', message: `${title} a bien été ajoutée`, timeout: 5 });
-    } catch (exception) {
-      addAlert({ severity: 'error', message: `Erreur dans l'ajout d'une formation`, timeout: 5 });
+    } catch (error) {
+      addAlert({ severity: 'error', message: `Erreur dans l'ajout d'une formation : ${error}`, timeout: 5 })
     }
+  }
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    idForm = event.target.selectedOptions[0].id
   }
 
   if (!isOpen) return null
@@ -81,20 +89,20 @@ export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
               </button>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 pb-5 pt-8">
-              <Select
-                id="title" errors={errors} isLoading={isLoading} register={register}>
-                <option disabled selected>Choisir la formation</option>
+              <select {...register("title")} className={clsx(
+                isLoading && 'cursor-not-allowed',
+                'border-bordergray focus:ring-primary w-full rounded border p-3 font-light focus:outline-none focus:ring-1'
+              )}
+                      id="title" onChange={handleSelectChange}>
+                <option disabled defaultValue={'Choisir la formation'}>Choisir la formation</option>
                 {Formations.map((formation) => (
-                  <option>{formation.title}</option>))}
-              </Select>
-              <Input
-                isLoading={isLoading}
-                type="text"
-                placeholder="ID de formation"
-                register={register}
-                errors={errors}
-                id="idFormation"
-              />
+                  <option key={formation._id} id={formation._id} value={formation.title}>{formation.title}</option>))}
+              </select>
+              <div className="h-2">
+                <label
+                  className="w-full p-3 font-light">Date
+                  de réalisation :</label>
+              </div>
               <Input
                 isLoading={isLoading}
                 type="date"
@@ -103,6 +111,11 @@ export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
                 errors={errors}
                 id="realisation"
               />
+              <div className="h-2">
+                <label
+                  className="w-full p-3 font-light">Date
+                  de fin de validité :</label>
+              </div>
               <Input
                 isLoading={isLoading}
                 type="date"

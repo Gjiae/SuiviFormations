@@ -153,7 +153,7 @@ export const Button = ({
         'relative animate'
       )}
       onClick={handleClick}
-      disabled={disabled || isLoading ? true : false}
+      disabled={!!(disabled || isLoading)}
     >
       {buttonContent}
     </button>

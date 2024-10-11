@@ -5,15 +5,20 @@ const salariesSchema = require('../models/salaries')
 exports.createFormation = async (req, res) => {
   await salariesSchema.updateOne({ _id: req.params.id }, {
     $push: {
-      ...req.body
+      formations: {
+        idFormation: req.body.idFormation,
+        title: req.body.title,
+        realisation: req.body.realisation,
+        expiration: req.body.expiration
+      },
     }
-  },)
+  })
     .then((data) => {
       res.status(201).json(data)
     })
     .catch((error) => {
       res.status(400).json({
-        error: error,
+        error: error
       })
     })
 }
@@ -26,7 +31,7 @@ exports.getAll = async (req, res) => {
     })
     .catch((error) => {
       res.status(400).json({
-        error: error,
+        error: error
       })
     })
 }
@@ -37,13 +42,13 @@ exports.delete = async (req, res) => {
     $pull: {
       ...req.body.idFormation
     }
-  },)
+  })
     .then(() => {
       res.status(201).json({ message: 'La formation a bien été supprimée' })
     })
     .catch((error) => {
       res.status(400).json({
-        error: error,
+        error: error
       })
     })
 }

@@ -19,12 +19,8 @@ import { AddFormation } from '@/pages/salaries/addFormation/addFormation'
 
 export const EmployeeContent = () => {
   const [modalOpen, setModalOpen] = useState(false)
-  const [ModalAddForm, setModalAdd] = useState(false)
-
-  const setModalAddForm = async (isOpen: boolean, _id: string) => {
-    setModalAdd(isOpen)
-  }
-
+  const [ModalAddForm, setModalAddForm] = useState(false)
+  const [modified, setModified] = useState('')
   const { addAlert } = useAlerts()
 
   const onDeleteSalarie = async (_id: string) => {
@@ -84,7 +80,7 @@ export const EmployeeContent = () => {
 
   const [expandedRows, setExpandedRows] = useState(null)
 
-  const handleExpandRow = (index: any) => {
+  const handleExpandRow = (index) => {
     const currentExpandedRows = null
     const isRowExpanded = currentExpandedRows === index ? index : null
     const newExpandedRows = isRowExpanded
@@ -194,7 +190,10 @@ export const EmployeeContent = () => {
                   </td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-4">
-                      <div onClick={() => setModalAddForm(true, salaried._id)}
+                      <div onClick={() => {
+                        setModalAddForm(true)
+                        setModified(salaried._id)
+                      }}
                            className="cursor-pointer">
                         <Tooltip id="1" tooltip="Ajouter une formation">
                           <FaPlus className="text-secondary" />
@@ -250,7 +249,7 @@ export const EmployeeContent = () => {
                               </div>
                             </div>
                           ) : (
-                            <div className="no-data"> No activity found! </div>
+                            <div>No activity found !</div>
                           )}
                         </div>
                       </td>
@@ -265,7 +264,7 @@ export const EmployeeContent = () => {
         </div>
       </Container>
       <AddEmployee isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-      <AddFormation isOpen={ModalAddForm} onClose={() => setModalAddForm(false, 'null')} />
+      <AddFormation isOpen={ModalAddForm} onClose={() => setModalAddForm(false)}  idSalaried={modified}/>
       <div className="fixed bottom-8 right-8 z-40">
         <ToolTip id="100" tooltip="Ajouter un salarié">
           <Button variant="ico" icon={{ icon: FaPlus }} action={() => setModalOpen(true)} />

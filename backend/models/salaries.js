@@ -11,7 +11,7 @@ const salariesSchema = mongoose.Schema({
     idFormation: { type: String, required: false },
     title: { type: String, required: false },
     realisation: { type: Date, required: false },
-    expiration: { type: Date, required: false },
+    expiration: { type: Date, required: false }
   }
 })
 

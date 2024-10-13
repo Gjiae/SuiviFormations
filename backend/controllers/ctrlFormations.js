@@ -37,7 +37,7 @@ exports.getAll = async (req, res) => {
 }
 
 //Supprimer une formation de la DB par son ID unique
-exports.delete = async (req, res) => {
+exports.deleteFormation = async (req, res) => {
   await salariesSchema.updateOne({ _id: req.params.id }, {
     $pull: {
       formations: {

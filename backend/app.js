@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const Formations = require('./routes/gestionFormations')
+const Formation = require('./routes/gestionFormation')
 const Salaries = require('./routes/gestionSalaries')
 const userRoutes = require('./routes/user')
 const app = express()
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json())
 
+app.use('/api/formation', Formation)
 app.use('/api/formations', Formations)
 app.use('/api/salaries', Salaries)
 app.use('/api/auth', userRoutes)

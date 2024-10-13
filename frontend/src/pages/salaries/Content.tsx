@@ -77,11 +77,11 @@ export const EmployeeContent = () => {
 
   useEffect(() => {
     getSalariesInfos()
-  }, [])
+  },)
 
   const [expandedRows, setExpandedRows] = useState(null)
 
-  const handleExpandRow = (index) => {
+  const handleExpandRow = (index: any) => {
     const currentExpandedRows = null
     const isRowExpanded = currentExpandedRows === index ? index : null
     const newExpandedRows = isRowExpanded

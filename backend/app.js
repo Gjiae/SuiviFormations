@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const Formations = require('./routes/gestionFormations')
 const Formation = require('./routes/gestionFormation')
 const Salaries = require('./routes/gestionSalaries')
+const uploadFile = require('./routes/uploadFiles')
 const userRoutes = require('./routes/user')
 const app = express()
 
@@ -25,5 +26,6 @@ app.use('/api/formation', Formation)
 app.use('/api/formations', Formations)
 app.use('/api/salaries', Salaries)
 app.use('/api/auth', userRoutes)
+app.use('/api/uploadFile', uploadFile)
 
 module.exports = app

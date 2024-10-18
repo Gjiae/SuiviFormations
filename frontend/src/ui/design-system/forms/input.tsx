@@ -5,8 +5,8 @@ interface Props {
   isLoading: boolean
   placeholder: string
   type?: 'text' | 'email' | 'password' | 'date' | 'file'
-  register: any
-  errors: any
+  register: never
+  errors: never
   errorMsg?: string
   id: string
   required?: boolean

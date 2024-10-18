@@ -1,10 +1,10 @@
 export interface FormsType {
-  control?: any
-  onSubmit: any
-  errors: any
+  control?: never
+  onSubmit: never
+  errors: never
   isLoading: boolean
-  register: any
-  handleSubmit: any
+  register: never
+  handleSubmit: never
 }
 
 export interface RegisterFormFieldsType {

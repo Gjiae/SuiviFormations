@@ -27,12 +27,12 @@ export const EmployeeContent = () => {
   const onDeleteSalarie = async (_id: string) => {
     try {
       const res = await deleteEmployeeApi.deleteEmployee(_id)
-      if (res.response === "success") {
+      if (res.response === 'success') {
         await getSalariesInfos()
-        addAlert({ severity: 'success', message: "Le salarié a bien été supprimé de la liste !", timeout: 5 });
+        addAlert({ severity: 'success', message: 'Le salarié a bien été supprimé de la liste !', timeout: 5 })
       }
     } catch (err) {
-      addAlert({ severity: 'error', message: `Une erreur a eu lieu lors de la suppression : ${err}`, timeout: 5 });
+      addAlert({ severity: 'error', message: `Une erreur a eu lieu lors de la suppression : ${err}`, timeout: 5 })
     }
   }
 
@@ -40,12 +40,12 @@ export const EmployeeContent = () => {
     try {
       const res = await deleteFormationAPI.deleteFormation({ idSalaried, idFormation })
       console.log(res.response)
-      if (res.response === "success") {
+      if (res.response === 'success') {
         await getSalariesInfos()
-        addAlert({ severity: 'success', message: "La formation a bien été supprimée de la liste !", timeout: 5 });
+        addAlert({ severity: 'success', message: 'La formation a bien été supprimée de la liste !', timeout: 5 })
       }
     } catch (err) {
-      addAlert({ severity: 'error', message: `Une erreur a eu lieu lors de la suppression : ${err}`, timeout: 5 });
+      addAlert({ severity: 'error', message: `Une erreur a eu lieu lors de la suppression : ${err}`, timeout: 5 })
     }
   }
 
@@ -70,16 +70,16 @@ export const EmployeeContent = () => {
 
   const getSalariesInfos = async (): Promise<void> => {
     try {
-      const response = await axios.get('http://localhost:3000/api/salaries');
-      setSalaries(response.data);
+      const response = await axios.get('http://localhost:3000/api/salaries')
+      setSalaries(response.data)
     } catch (error) {
-      addAlert({ severity: 'error', message: { error }, timeout: 5 });
+      addAlert({ severity: 'error', message: { error }, timeout: 5 })
     }
-  };
+  }
 
   useEffect(() => {
-    getSalariesInfos().then(() => console.log('Liste des salariés chargée'));
-  },[])
+    getSalariesInfos().then(() => console.log('Liste des salariés chargée'))
+  }, [])
 
   const [expandedRows, setExpandedRows] = useState(null)
 
@@ -157,8 +157,9 @@ export const EmployeeContent = () => {
               </thead>
               {filtered.map((salaried, index) => (
                 <tbody key={index}>
-                <tr onClick={() => handleExpandRow(index)} className={salaried.formations?.length > 0 ? "cursor-pointer" : "" }>
-                  <td className="px-5">
+                <tr>
+                  <td onClick={() => handleExpandRow(index)}
+                      className={`px-5 ${salaried.formations?.length > 0 ? 'cursor-pointer' : ''}`}>
                     <div className="flex items-center gap-4">
                       <Avatar
                         size="large"
@@ -175,7 +176,8 @@ export const EmployeeContent = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="px-5 py-3">
+                  <td onClick={() => handleExpandRow(index)}
+                      className={`px-5 py-3 ${salaried.formations?.length > 0 ? 'cursor-pointer' : ''}`}>
                     <Typography variant="16Reg" theme="black">
                       {salaried.service}
                     </Typography>
@@ -183,7 +185,8 @@ export const EmployeeContent = () => {
                       {salaried.metier}
                     </Typography>
                   </td>
-                  <td className="px-5 py-3">
+                  <td onClick={() => handleExpandRow(index)}
+                      className={`px-5 py-3 ${salaried.formations?.length > 0 ? 'cursor-pointer' : ''}`}>
                     <Typography variant="16Reg" theme="black">
                       {salaried.formations?.length > 0 ? salaried.formations?.length > 1 ? `${salaried.formations?.length} formations` : `${salaried.formations?.length} formation` : 'Aucune formation'}
                     </Typography>
@@ -234,7 +237,8 @@ export const EmployeeContent = () => {
                                   : {formatDate(formation.expiration)}</Typography>
                               </div>
                               <div className="col-span-1 flex items-center justify-end gap-2">
-                                <Link href={`http://localhost:3000/api/uploadFile/${formation.idAttestation}`} className="text-secondary">
+                                <Link href={`http://localhost:3000/api/uploadFile/${formation.idAttestation}`}
+                                      className="text-secondary">
                                   <Tooltip id="10" tooltip="Télécharger le fichier">
                                     <FaDownload />
                                   </Tooltip>
@@ -244,7 +248,8 @@ export const EmployeeContent = () => {
                                     <FaEdit />
                                   </Tooltip>
                                 </Link>
-                                <div onClick={() => onDeleteFormation(salaried._id, formation.idFormation)} className="cursor-pointer">
+                                <div onClick={() => onDeleteFormation(salaried._id, formation.idFormation)}
+                                     className="cursor-pointer">
                                   <Tooltip id="30" tooltip="Supprimer">
                                     <FaRegTrashCan className="text-red" />
                                   </Tooltip>
@@ -267,7 +272,7 @@ export const EmployeeContent = () => {
         </div>
       </Container>
       <AddEmployee isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-      <AddFormation isOpen={ModalAddForm} onClose={() => setModalAddForm(false)}  idSalaried={modified}/>
+      <AddFormation isOpen={ModalAddForm} onClose={() => setModalAddForm(false)} idSalaried={modified} />
       <div className="fixed bottom-8 right-8 z-40">
         <ToolTip id="100" tooltip="Ajouter un salarié">
           <Button variant="ico" icon={{ icon: FaPlus }} action={() => setModalOpen(true)} />

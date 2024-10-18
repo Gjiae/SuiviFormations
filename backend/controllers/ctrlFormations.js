@@ -1,8 +1,22 @@
 const formationsSchema = require('../models/formations')
 const salariesSchema = require('../models/salaries')
 
-//Ajouter une formation au salarié
+//Créer une formation
 exports.createFormation = async (req, res) => {
+  try {
+    const newFormation = new formationsSchema(req.body)
+    const savedFormation = await newFormation.save()
+    res.status(201).json({
+      message: `${newFormation.title} ajoutée avec succès`,
+      value: savedFormation
+    })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur dans la création d\'une nouvelle formation\'' })
+  }
+}
+
+//Ajouter une formation au salarié
+exports.addFormation = async (req, res) => {
   await salariesSchema.updateOne({ _id: req.params.id }, {
     $push: {
       formations: {
@@ -47,11 +61,11 @@ exports.deleteFormation = async (req, res) => {
     }
   })
     .then(() => {
-      res.status(201).json({"response": "success"})
+      res.status(201).json({ 'response': 'success' })
     })
     .catch((error) => {
       res.status(400).json({
-        error: error,
+        error: error
       })
     })
 }

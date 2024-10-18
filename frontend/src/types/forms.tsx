@@ -1,10 +1,10 @@
 export interface FormsType {
-  control?: never
-  onSubmit: never
-  errors: never
+  control?: any
+  onSubmit: any
+  errors: any
   isLoading: boolean
-  register: never
-  handleSubmit: never
+  register: any
+  handleSubmit: any
 }
 
 export interface RegisterFormFieldsType {
@@ -28,6 +28,10 @@ export interface AddEmployeeFormFieldsType {
   metier: string
   email: string
   sexe: string
+}
+
+export interface CreateFormationFormFieldsType {
+  title: string
 }
 
 export interface AddFormationFormFieldsType {

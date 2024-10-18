@@ -2,7 +2,6 @@ import { Layout } from '@/ui/components/layout/layout'
 import { Seo } from '@/ui/components/seo'
 import { EmployeeContent } from './salaries/Content'
 
-
 export default function Salaries() {
   return (
     <>

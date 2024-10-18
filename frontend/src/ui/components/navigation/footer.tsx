@@ -5,15 +5,15 @@ export const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="py-2 px-5 lg:px-10">
-      <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
+    <footer className="mb-6 lg:px-5">
+      <Container className="flex w-full flex-wrap items-center justify-center md:justify-between">
         <Typography variant="14Med">
           &copy; {year}, créé par{' '}
-          <a className="transition-colors hover:text-blue-500 font-bold">
+          <a className="font-bold transition-colors hover:text-blue-500">
             Valentin Gazzoli.
           </a>
         </Typography>
-      </div>
+      </Container>
     </footer>
   )
 }

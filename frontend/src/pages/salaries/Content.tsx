@@ -16,7 +16,6 @@ import deleteFormationAPI from '@/api/deleteFormation'
 import axios from 'axios'
 import { useAlerts } from '@/ui/components/alerts/alerts-context'
 import { AddFormation } from '@/pages/salaries/addFormation/addFormation'
-import uploadFile from '@/api/uploadFile'
 
 export const EmployeeContent = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -39,7 +38,6 @@ export const EmployeeContent = () => {
   const onDeleteFormation = async (idSalaried: string, idFormation: string) => {
     try {
       const res = await deleteFormationAPI.deleteFormation({ idSalaried, idFormation })
-      console.log(res.response)
       if (res.response === 'success') {
         await getSalariesInfos()
         addAlert({ severity: 'success', message: 'La formation a bien été supprimée de la liste !', timeout: 5 })

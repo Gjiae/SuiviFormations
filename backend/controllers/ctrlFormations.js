@@ -47,11 +47,11 @@ exports.deleteFormation = async (req, res) => {
     }
   })
     .then(() => {
-      res.status(201).json({ message: 'La formation a bien été supprimée' })
+      res.status(201).json({"response": "success"})
     })
     .catch((error) => {
       res.status(400).json({
-        error: error
+        error: error,
       })
     })
 }

@@ -61,12 +61,6 @@ const Sidebar = () => {
             </div>
             <p className="block mr-auto leading-tight">Formations</p>
           </ActiveLink>
-          <ActiveLink href="/AddFile">
-            <div className="grid mr-4">
-              <FaFileArrowUp />
-            </div>
-            <p className="block mr-auto leading-tight">AddFile</p>
-          </ActiveLink>
         </div>
         {/*        <div className="relative block w-full">
           <div

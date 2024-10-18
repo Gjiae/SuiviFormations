@@ -16,6 +16,7 @@ import deleteFormationAPI from '@/api/deleteFormation'
 import axios from 'axios'
 import { useAlerts } from '@/ui/components/alerts/alerts-context'
 import { AddFormation } from '@/pages/salaries/addFormation/addFormation'
+import uploadFile from '@/api/uploadFile'
 
 export const EmployeeContent = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -61,7 +62,8 @@ export const EmployeeContent = () => {
         idFormation: '',
         title: '',
         realisation: '',
-        expiration: new Date
+        expiration: new Date,
+        idAttestation: ''
       }]
     }
   ])
@@ -76,8 +78,8 @@ export const EmployeeContent = () => {
   };
 
   useEffect(() => {
-    getSalariesInfos()
-  },)
+    getSalariesInfos().then(() => console.log('Liste des salariés chargée'));
+  },[])
 
   const [expandedRows, setExpandedRows] = useState(null)
 
@@ -232,8 +234,8 @@ export const EmployeeContent = () => {
                                   : {formatDate(formation.expiration)}</Typography>
                               </div>
                               <div className="col-span-1 flex items-center justify-end gap-2">
-                                <Link href="/" className="text-secondary">
-                                  <Tooltip id="10" tooltip="Accéder au fichier">
+                                <Link href={`http://localhost:3000/api/uploadFile/${formation.idAttestation}`} className="text-secondary">
+                                  <Tooltip id="10" tooltip="Télécharger le fichier">
                                     <FaDownload />
                                   </Tooltip>
                                 </Link>

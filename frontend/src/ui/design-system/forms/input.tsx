@@ -4,13 +4,14 @@ import { Typography } from '../typography'
 interface Props {
   isLoading: boolean
   placeholder: string
-  type?: 'text' | 'email' | 'password' | 'date'
+  type?: 'text' | 'email' | 'password' | 'date' | 'file'
   register: any
   errors: any
   errorMsg?: string
   id: string
   required?: boolean
   isAutoCompleted?: boolean
+  onChange?: Function
 }
 
 export const Input = ({
@@ -23,6 +24,7 @@ export const Input = ({
   id,
   required = true,
   isAutoCompleted = false,
+  onChange,
 }: Props) => {
   return (
     <div>
@@ -41,6 +43,7 @@ export const Input = ({
             message: errorMsg,
           },
         })}
+        onChange={onChange}
         autoComplete={isAutoCompleted ? 'on' : 'off'}
       />
       {errors[id] && (

@@ -9,7 +9,8 @@ exports.createFormation = async (req, res) => {
         idFormation: req.body.idFormation,
         title: req.body.title,
         realisation: req.body.realisation,
-        expiration: req.body.expiration
+        expiration: req.body.expiration,
+        idAttestation: req.body.idAttestation
       }
     }
   })

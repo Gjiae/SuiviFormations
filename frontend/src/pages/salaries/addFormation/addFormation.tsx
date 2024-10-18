@@ -11,6 +11,7 @@ import { useAlerts } from '@/ui/components/alerts/alerts-context'
 import addFormationAPI from '@/api/addFormation'
 import axios from 'axios'
 import clsx from 'clsx'
+import uploadFileAPI from '@/api/uploadFile'
 
 interface Props {
   isOpen: boolean
@@ -21,8 +22,9 @@ interface Props {
 export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const id: string = idSalaried
-  let idForm: any
+  const [idFormation, setIDForm] = useState('')
   const { addAlert } = useAlerts()
+  const [file, setFile] = useState(null)
 
   const [Formations, setFormations] = useState<
     { _id: string; title: string }[]
@@ -38,8 +40,8 @@ export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
   }
 
   useEffect(() => {
-    getFormationsInfos()
-  }, [idSalaried])
+    getFormationsInfos().then(() => console.log('Chargement des formations réussi.'))
+  }, [])
 
   const {
     formState: { errors },
@@ -51,28 +53,39 @@ export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
       title: 'Choisir la formation',
       idFormation: '',
       realisation: '',
-      expiration: ''
-    }})
+      expiration: '',
+    }
+  })
 
   const onSubmit: SubmitHandler<AddFormationFormFieldsType> = async (formData) => {
     setIsLoading(true)
-    const { idFormation = idForm, title, realisation, expiration } = formData
+    const { title, realisation, expiration } = formData
     try {
+      await uploadFileAPI.uploadFile(file)
+      const idAttestation = global.config.test.idAttest
       await addFormationAPI.addFormation({
-        id, idFormation, title, realisation, expiration
+        id, idFormation, title, realisation, expiration, idAttestation
       })
-      reset()
-      onClose()
+      //reset()
+      //onClose()
       setIsLoading(false)
-      addAlert({ severity: 'success', message: `${title} a bien été ajoutée`, timeout: 5 })
-      window.location.reload()
+      //addAlert({ severity: 'success', message: `${title} a bien été ajoutée`, timeout: 5 })
+      //window.location.reload()
     } catch (error) {
       addAlert({ severity: 'error', message: `Erreur dans l'ajout d'une formation : ${error}`, timeout: 5 })
     }
   }
 
+  const getFileInfo = (e) => {
+    console.log(e.target.files[0]);
+    const formData = new FormData();
+    //FILE INFO NAME WILL BE "my-image-file"
+    formData.append('my-image-file', e.target.files[0], e.target.files[0].name);
+    setFile(formData);
+  }
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    idForm = event.target.selectedOptions[0].id
+    setIDForm(event.target.selectedOptions[0].id)
   }
 
   if (!isOpen) return null
@@ -89,7 +102,7 @@ export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
               </button>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 pb-5 pt-8">
-              <select {...register("title")} className={clsx(
+              <select {...register('title')} className={clsx(
                 isLoading && 'cursor-not-allowed',
                 'border-bordergray focus:ring-primary w-full rounded border p-3 font-light focus:outline-none focus:ring-1'
               )}
@@ -123,6 +136,19 @@ export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
                 register={register}
                 errors={errors}
                 id="expiration"
+              />
+              <div className="h-2">
+                <label
+                  className="w-full p-3 font-light">Joindre l'attestation :</label>
+              </div>
+              <Input
+                isLoading={isLoading}
+                type="file"
+                placeholder="Attestation"
+                register={register}
+                errors={errors}
+                id="attestation"
+                onChange={getFileInfo}
               />
               <Button isLoading={isLoading} type="submit" fullWidth>
                 Ajouter la formation

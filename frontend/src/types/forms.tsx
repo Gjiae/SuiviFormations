@@ -36,4 +36,5 @@ export interface AddFormationFormFieldsType {
   title: string
   realisation: string
   expiration: string
+  idAttestation: string
 }

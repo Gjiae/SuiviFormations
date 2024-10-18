@@ -2,6 +2,7 @@ import { Footer } from '../navigation/footer'
 import { Navigation } from '../navigation/navigation'
 import Sidebar from '../navigation/sidebar'
 import AlertsProvider from '@/ui/components/alerts/alerts-context'
+import '../../../../config'
 
 interface Props {
   children: React.ReactNode

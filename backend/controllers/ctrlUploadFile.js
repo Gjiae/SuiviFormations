@@ -31,28 +31,25 @@ const uploadFile = async (req, res) => {
 // Obtenir l'url du fichier pour l'ouvrir
 const getFile = async (req, res) => {
   try {
-    const image = await File.findById(req.params.id); //req -> local:Url
-    // await console.log(image.name)
-    if (!image) {
+    const file = await File.findById(req.params.id); //req -> local:Url
+    if (!file) {
       return res.status(404).json({ error: 'Image not found' });
     }
 
-    // Construct the path to the image file in the uploads folder based on _id
-    // const imagePath = path.join(__dirname, 'uploads', `${req.user._id}-${image.name}`); //"will use when add authentication"
-    // const imagePath = path.join(__dirname, 'uploads', `${image.name}`);  //this is disgusting `${}`
-    const imagePath = path.join(__dirname, '..', 'public', image.name);
-    // console.log(imagePath);
+    const filePath = path.join(__dirname, '..', 'public', file.name);
 
     // Check if the file exists
-    if (!fs.existsSync(imagePath)) {
-      return res.status(404).json({ error: 'Image file not found' });
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'File file not found' });
     }
 
-    // Send the image file as a response
-    res.sendFile(imagePath);
+    // Visionner le fichier
+    //res.sendFile(imagePath);
+    //Télécharger le fichier
+    res.download(filePath)
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to retrieve image' });
+    res.status(500).json({ error: 'Failed to retrieve file' });
   }
 }
 

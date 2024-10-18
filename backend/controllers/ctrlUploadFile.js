@@ -5,26 +5,26 @@ const fs = require('fs');
 // Enregistrer le fichier dans la DB et sur le serveur
 const uploadFile = async (req, res) => {
   try {
-    // Create an Image model instance.
-    const image = new File({
+    // Create a File model instance.
+    const file = new File({
       name: req.file.originalname,
       contentType: req.file.mimetype,
     });
 
-    // Save the Image model instance to the database.
-    const savedImage = await image.save();
+    // Save the File model instance to the database.
+    const savedFile = await file.save();
 
-    // Set the imageUrl based on your server URL and the image ID
-    savedImage.fileURL = `http://localhost:3000/api/uploadFile/${savedImage._id}`;
-    //this is for getting the image from the database
+    // Set the fileUrl based on your server URL and the file ID
+    savedFile.fileURL = `http://localhost:3000/api/uploadFile/${savedFile._id}`;
+    //this is for getting the file from the database
 
-    // Save the updated Image model
-    await savedImage.save();
+    // Save the updated File model
+    await savedFile.save();
 
-    res.json(savedImage);
+    res.json(savedFile);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Image upload failed' });
+    res.status(500).json({ error: 'File upload failed' });
   }
 }
 
@@ -33,7 +33,7 @@ const getFile = async (req, res) => {
   try {
     const file = await File.findById(req.params.id); //req -> local:Url
     if (!file) {
-      return res.status(404).json({ error: 'Image not found' });
+      return res.status(404).json({ error: 'File not found' });
     }
 
     const filePath = path.join(__dirname, '..', 'public', file.name);

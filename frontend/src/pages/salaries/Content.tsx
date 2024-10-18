@@ -65,7 +65,6 @@ export const EmployeeContent = () => {
       }]
     }
   ])
-
   const getSalariesInfos = async (): Promise<void> => {
     try {
       const response = await axios.get('http://localhost:3000/api/salaries')
@@ -74,13 +73,11 @@ export const EmployeeContent = () => {
       addAlert({ severity: 'error', message: { error }, timeout: 5 })
     }
   }
-
   useEffect(() => {
     getSalariesInfos().then(() => console.log('Liste des salariés chargée'))
   }, [])
 
   const [expandedRows, setExpandedRows] = useState(null)
-
   const handleExpandRow = (index: any) => {
     const currentExpandedRows = null
     const isRowExpanded = currentExpandedRows === index ? index : null
@@ -95,11 +92,9 @@ export const EmployeeContent = () => {
   }
 
   const [filterText, setFilter] = useState('')
-
   const filterProducts = (event: ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value.toUpperCase())
   }
-
   const filtered = React.useMemo(() => {
     return Salaries.filter(salarie => {
       return filterText.length > 0 ?

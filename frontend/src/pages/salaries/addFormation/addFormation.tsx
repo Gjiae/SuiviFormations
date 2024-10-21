@@ -25,7 +25,6 @@ export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
   const [idFormation, setIDForm] = useState('')
   const { addAlert } = useAlerts()
   const [file, setFile] = useState(null)
-
   const [Formations, setFormations] = useState<
     { _id: string; title: string }[]
   >([])
@@ -66,18 +65,17 @@ export const AddFormation = ({ isOpen, onClose, idSalaried }: Props) => {
       await addFormationAPI.addFormation({
         id, idFormation, title, realisation, expiration, idAttestation
       })
-      //reset()
-      //onClose()
+      reset()
+      onClose()
       setIsLoading(false)
-      //addAlert({ severity: 'success', message: `${title} a bien été ajoutée`, timeout: 5 })
-      //window.location.reload()
+      addAlert({ severity: 'success', message: `${title} a bien été ajoutée`, timeout: 5 })
+      window.location.reload()
     } catch (error) {
       addAlert({ severity: 'error', message: `Erreur dans l'ajout d'une formation : ${error}`, timeout: 5 })
     }
   }
 
   const getFileInfo = (e) => {
-    console.log(e.target.files[0]);
     const formData = new FormData();
     //FILE INFO NAME WILL BE "my-image-file"
     formData.append('my-image-file', e.target.files[0], e.target.files[0].name);
